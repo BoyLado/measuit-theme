@@ -312,6 +312,7 @@
             color: var(--crimson);
         }
 
+        /* ═══ UPDATED HERO FEATURES (with spans and separators) ═══ */
         .hero-features {
             font-size: 13px;
             letter-spacing: .12em;
@@ -320,8 +321,19 @@
             font-weight: 400;
             text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5);
             opacity: .9;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.6em; /* spacing around the separators */
         }
 
+        .hero-features .separator {
+            display: inline-block;
+            margin: 0 0.2em;
+            color: var(--charcoal);
+        }
+
+        /* ── CTA ── */
         .hero-cta-group {
             display: flex;
             gap: 18px;
@@ -609,6 +621,16 @@
             /* ⭐ MOBILE HERO BACKGROUND IMAGE SWAP ⭐ */
             .hero-bg {
                 background-image: url('banner-bg-mobile.png');
+            }
+
+            /* ── Updated Hero Features for mobile: each item on new line ── */
+            .hero-features {
+                flex-direction: column;
+                align-items: flex-start; /* or center if preferred */
+                gap: 0.4em;
+            }
+            .hero-features .separator {
+                display: none; /* hide the dots */
             }
 
             nav {
@@ -979,7 +1001,14 @@
                 Funeral Directors
             </h1>
 
-            <p class="hero-features">REAL POCKETS · DURABLE STRETCH MATERIAL · CUSTOM SIZING</p>
+            <!-- ═══ UPDATED HERO FEATURES with spans and separators ═══ -->
+            <p class="hero-features">
+                <span>REAL POCKETS</span>
+                <span class="separator">·</span>
+                <span>DURABLE STRETCH MATERIAL</span>
+                <span class="separator">·</span>
+                <span>CUSTOM SIZING</span>
+            </p>
 
             <!-- ─── Single CTA Button (Primary) ─── -->
             <div class="hero-cta-group">
