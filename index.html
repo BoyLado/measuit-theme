@@ -254,7 +254,6 @@
             background-position: center;
             background-repeat: no-repeat;
             background-color: var(--cream);
-            /* Critical: ensure the image is rendered immediately */
             will-change: transform;
         }
 
@@ -393,10 +392,6 @@
             left: 120%;
         }
 
-        .hero-cta-primary:hover .btn-label {
-            transform: translateX(-4px);
-        }
-
         .hero-cta-primary:active {
             transform: translateY(-1px) scale(0.98);
             box-shadow:
@@ -414,39 +409,171 @@
             transition: transform .35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .btn-arrow {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 18px;
-            height: 18px;
-            transition: transform .35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                opacity .25s ease;
-            opacity: 0;
-            transform: translateX(-8px);
-            flex-shrink: 0;
-        }
-        .btn-arrow svg {
-            width: 16px;
-            height: 16px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .hero-cta-primary:hover .btn-arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
         .hero-cta-primary:focus-visible {
             outline: 3px solid var(--crimson);
             outline-offset: 3px;
             box-shadow:
                 0 0 0 6px rgba(138, 31, 45, 0.15),
                 0 8px 24px rgba(28, 26, 24, 0.25);
+        }
+
+        /* ══════════════════════════════════════════════
+           TESTIMONIAL SECTION
+           ══════════════════════════════════════════════ */
+
+        .testimonials {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(to right,
+                var(--cream) 0%,
+                #C9938A 30%,
+                #B97F77 60%,
+                #A86D65 100%);
+            border-top: 1px solid rgba(0,0,0,0.06);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 80px 0 0;
+            min-height: 200px;
+        }
+
+        /* Photo column */
+        .testimonial-photo {
+            flex-shrink: 0;
+            width: 220px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            align-self: stretch;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-photo img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        /* Placeholder silhouette when no image */
+        .testimonial-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 200px;
+            background: rgba(255,255,255,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .testimonial-photo-placeholder svg {
+            width: 80px;
+            height: 80px;
+            opacity: 0.3;
+            fill: white;
+        }
+
+        /* Quote column */
+        .testimonial-body {
+            flex: 1;
+            padding: 40px 48px 40px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .testimonial-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(17px, 2vw, 22px);
+            line-height: 1.55;
+            color: #fff;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.15);
+        }
+
+        .testimonial-name {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        /* Arrow buttons */
+        .testimonial-arrows {
+            flex-shrink: 0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding-right: 8px;
+        }
+
+        .testimonial-arrow-btn {
+            width: 44px;
+            height: 44px;
+            border: 2px solid rgba(255,255,255,0.55);
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s, border-color 0.25s, transform 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            flex-shrink: 0;
+        }
+        .testimonial-arrow-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .testimonial-arrow-btn:hover {
+            background: rgba(255,255,255,0.18);
+            border-color: rgba(255,255,255,0.9);
+            transform: scale(1.07);
+        }
+        .testimonial-arrow-btn:active {
+            transform: scale(0.95);
+            transition-duration: .1s;
+        }
+
+        /* Dots */
+        .testimonial-dots {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 7px;
+        }
+        .testimonial-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transition: background 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        .testimonial-dot.active {
+            background: #fff;
+            transform: scale(1.3);
         }
 
         .demo-spacer {
@@ -470,9 +597,20 @@
             .logo img {
                 max-height: 38px;
             }
+            .testimonial-slide {
+                padding-right: 60px;
+            }
+            .testimonial-photo {
+                width: 180px;
+            }
         }
 
         @media (max-width: 768px) {
+            /* ⭐ MOBILE HERO BACKGROUND IMAGE SWAP ⭐ */
+            .hero-bg {
+                background-image: url('banner-bg-mobile.png');
+            }
+
             nav {
                 padding: 0 20px;
                 height: 64px;
@@ -637,13 +775,40 @@
                 font-size: 11px;
                 letter-spacing: .12em;
                 min-width: 150px;
-                flex: 1 1 auto;
+                flex: 0 0 auto;
                 justify-content: center;
                 gap: 8px;
             }
-            .btn-arrow { width: 14px; height: 14px; }
-            .btn-arrow svg { width: 13px; height: 13px; }
             .btn-label { gap: 8px; }
+
+            /* Testimonial mobile */
+            .testimonial-slide {
+                padding: 0 20px 0 0;
+                flex-direction: row;
+                min-height: 180px;
+            }
+            .testimonial-photo {
+                width: 120px;
+            }
+            .testimonial-body {
+                padding: 28px 20px 28px 24px;
+                gap: 10px;
+            }
+            .testimonial-quote {
+                font-size: clamp(14px, 3.5vw, 17px);
+            }
+            .testimonial-name {
+                font-size: 10px;
+                letter-spacing: .14em;
+            }
+            .testimonial-arrow-btn {
+                width: 36px;
+                height: 36px;
+            }
+            .testimonial-arrow-btn svg {
+                width: 13px;
+                height: 13px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -693,16 +858,39 @@
                 padding: 14px 20px;
                 font-size: 10px;
                 letter-spacing: .10em;
-                width: 100%;
+                width: auto;
                 justify-content: center;
                 min-width: unset;
                 gap: 6px;
             }
-            .btn-arrow { width: 12px; height: 12px; }
-            .btn-arrow svg { width: 11px; height: 11px; stroke-width: 2.2; }
             .btn-label { gap: 6px; }
 
             .topbar { gap: 10px; font-size: 9px; padding: 6px 12px; }
+
+            /* Testimonial xs */
+            .testimonial-slide {
+                padding-right: 12px;
+                min-height: 160px;
+            }
+            .testimonial-photo {
+                width: 90px;
+            }
+            .testimonial-body {
+                padding: 20px 10px 20px 16px;
+            }
+            .testimonial-arrows {
+                flex-direction: column;
+                gap: 6px;
+                padding-right: 4px;
+            }
+            .testimonial-arrow-btn {
+                width: 30px;
+                height: 30px;
+            }
+            .testimonial-arrow-btn svg {
+                width: 11px;
+                height: 11px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -796,24 +984,100 @@
             <!-- ─── Single CTA Button (Primary) ─── -->
             <div class="hero-cta-group">
                 <a class="hero-cta-primary" href="#">
-                    <span class="btn-label">
-                        Enter Giveaway
-                        <span class="btn-arrow" aria-hidden="true">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="4" y1="12" x2="20" y2="12" />
-                                <polyline points="13 5 20 12 13 19" />
-                            </svg>
-                        </span>
-                    </span>
+                    <span class="btn-label">Enter Giveaway</span>
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- ─── Testimonial Section ─── -->
+    <section class="testimonials" id="testimonialSection" aria-label="Customer testimonials">
+        <div class="testimonial-track" id="testimonialTrack">
+
+            <!-- Slide 1 -->
+            <div class="testimonial-slide" role="group" aria-label="Testimonial 1 of 3">
+                <div class="testimonial-photo">
+                    <div class="testimonial-photo-placeholder">
+                        <!-- Placeholder — replace with: <img src="testimonial-1.jpg" alt="Dakota J." /> -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="testimonial-body">
+                    <p class="testimonial-quote">"The absolute best customer service you can ask for… the quality of the suits were really amazing and I could not be happier with them!"</p>
+                    <p class="testimonial-name">Dakota J. &mdash; Oklahoma</p>
+                </div>
+                <div class="testimonial-arrows" aria-label="Carousel navigation">
+                    <button class="testimonial-arrow-btn" id="prevBtn" aria-label="Previous testimonial">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                    <button class="testimonial-arrow-btn" id="nextBtn" aria-label="Next testimonial">
+                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="testimonial-slide" role="group" aria-label="Testimonial 2 of 3">
+                <div class="testimonial-photo">
+                    <div class="testimonial-photo-placeholder">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="testimonial-body">
+                    <p class="testimonial-quote">"Finally a suit that actually fits and moves with me throughout the day. I wore it for a full service and felt completely professional and comfortable."</p>
+                    <p class="testimonial-name">Michelle R. &mdash; Texas</p>
+                </div>
+                <div class="testimonial-arrows" aria-label="Carousel navigation">
+                    <button class="testimonial-arrow-btn tprev" aria-label="Previous testimonial">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                    <button class="testimonial-arrow-btn tnext" aria-label="Next testimonial">
+                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="testimonial-slide" role="group" aria-label="Testimonial 3 of 3">
+                <div class="testimonial-photo">
+                    <div class="testimonial-photo-placeholder">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="testimonial-body">
+                    <p class="testimonial-quote">"I was skeptical at first but the custom sizing made all the difference. It fits perfectly and the pockets are an absolute game changer on the job."</p>
+                    <p class="testimonial-name">Samantha W. &mdash; California</p>
+                </div>
+                <div class="testimonial-arrows" aria-label="Carousel navigation">
+                    <button class="testimonial-arrow-btn tprev" aria-label="Previous testimonial">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                    <button class="testimonial-arrow-btn tnext" aria-label="Next testimonial">
+                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Dots -->
+        <div class="testimonial-dots" id="testimonialDots" aria-hidden="true">
+            <div class="testimonial-dot active" data-index="0"></div>
+            <div class="testimonial-dot" data-index="1"></div>
+            <div class="testimonial-dot" data-index="2"></div>
         </div>
     </section>
 
     <!-- ─── Dummy content ─── -->
     <div class="demo-spacer"></div>
 
-    <!-- ─── JavaScript: Header Visibility, Mobile Menu, Smooth Scrolling ─── -->
+    <!-- ─── JavaScript ─── -->
     <script>
         (function() {
             // ─── Header show/hide on scroll ───
@@ -857,32 +1121,81 @@
 
             hamburgerBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                if (isMenuOpen) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
+                if (isMenuOpen) { closeMenu(); } else { openMenu(); }
             });
 
             menuBackdrop.addEventListener('click', closeMenu);
 
             navLinks.querySelectorAll('a').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    closeMenu();
-                });
+                link.addEventListener('click', function() { closeMenu(); });
             });
 
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && isMenuOpen) {
-                    closeMenu();
-                }
+                if (e.key === 'Escape' && isMenuOpen) { closeMenu(); }
             });
 
             window.addEventListener('resize', function() {
-                if (window.innerWidth > 768 && isMenuOpen) {
-                    closeMenu();
-                }
+                if (window.innerWidth > 768 && isMenuOpen) { closeMenu(); }
             });
+
+            // ─── Testimonial Carousel ───
+            const track = document.getElementById('testimonialTrack');
+            const slides = track.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            const total = slides.length;
+            let current = 0;
+            let autoTimer;
+
+            function goTo(index) {
+                current = (index + total) % total;
+                track.style.transform = 'translateX(-' + (current * 100) + '%)';
+                dots.forEach(function(d, i) {
+                    d.classList.toggle('active', i === current);
+                });
+            }
+
+            function startAuto() {
+                autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+            }
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                startAuto();
+            }
+
+            // Wire all prev/next buttons
+            document.getElementById('prevBtn').addEventListener('click', function() { goTo(current - 1); resetAuto(); });
+            document.getElementById('nextBtn').addEventListener('click', function() { goTo(current + 1); resetAuto(); });
+
+            document.querySelectorAll('.testimonial-arrow-btn.tprev').forEach(function(btn) {
+                btn.addEventListener('click', function() { goTo(current - 1); resetAuto(); });
+            });
+            document.querySelectorAll('.testimonial-arrow-btn.tnext').forEach(function(btn) {
+                btn.addEventListener('click', function() { goTo(current + 1); resetAuto(); });
+            });
+
+            // Dot navigation
+            dots.forEach(function(dot) {
+                dot.addEventListener('click', function() {
+                    goTo(parseInt(dot.dataset.index));
+                    resetAuto();
+                });
+            });
+
+            // Touch/swipe support
+            let touchStartX = 0;
+            track.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+            }, { passive: true });
+            track.addEventListener('touchend', function(e) {
+                const diff = touchStartX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) {
+                    goTo(diff > 0 ? current + 1 : current - 1);
+                    resetAuto();
+                }
+            }, { passive: true });
+
+            startAuto();
 
             // ─── Ultra-Smooth Mac-like Scrolling ───
             if (!('ontouchstart' in window) && !navigator.msMaxTouchPoints) {
@@ -911,7 +1224,6 @@
                             isAnimating = false;
                             return;
                         }
-
                         currentScroll += difference * ease;
                         window.scrollTo(0, currentScroll);
                         requestAnimationFrame(step);
@@ -941,27 +1253,13 @@
                         let newTarget = targetScroll;
 
                         switch (e.key) {
-                            case 'ArrowDown':
-                                newTarget = clamp(targetScroll + 100, 0, maxScroll());
-                                break;
-                            case 'ArrowUp':
-                                newTarget = clamp(targetScroll - 100, 0, maxScroll());
-                                break;
-                            case 'PageDown':
-                                newTarget = clamp(targetScroll + viewportHeight * 0.9, 0, maxScroll());
-                                break;
-                            case 'PageUp':
-                                newTarget = clamp(targetScroll - viewportHeight * 0.9, 0, maxScroll());
-                                break;
-                            case ' ':
-                                newTarget = clamp(targetScroll + viewportHeight * 0.9, 0, maxScroll());
-                                break;
-                            case 'Home':
-                                newTarget = 0;
-                                break;
-                            case 'End':
-                                newTarget = maxScroll();
-                                break;
+                            case 'ArrowDown': newTarget = clamp(targetScroll + 100, 0, maxScroll()); break;
+                            case 'ArrowUp':   newTarget = clamp(targetScroll - 100, 0, maxScroll()); break;
+                            case 'PageDown':  newTarget = clamp(targetScroll + viewportHeight * 0.9, 0, maxScroll()); break;
+                            case 'PageUp':    newTarget = clamp(targetScroll - viewportHeight * 0.9, 0, maxScroll()); break;
+                            case ' ':         newTarget = clamp(targetScroll + viewportHeight * 0.9, 0, maxScroll()); break;
+                            case 'Home':      newTarget = 0; break;
+                            case 'End':       newTarget = maxScroll(); break;
                         }
 
                         if (newTarget !== targetScroll) {
