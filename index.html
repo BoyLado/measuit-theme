@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mea — Homepage Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+        /* ── Reset & Base ── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --charcoal: #6B6560;
+            --burgundy: #5C3234;
+            --crimson: #8A1F2D;
+            --crimson-dark: #6F1622;
+            --crimson-light: #A53A45;
+            --blush: #DBB3A8;
+            --mauve: #B98A7C;
+            --ink: #191512;
+            --cream: #F2EDE4;
+            --ivory: #F7F3EC;
+            --espresso: #1C1A18;
+            --espresso-light: #2E2A26;
+            --gold: #C4A882;
+            /* --pink variable removed */
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background: var(--ivory);
+            color: var(--ink);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ── Fixed Header (hidden until scroll) ── */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.45s ease;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .site-header.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ── Top Bar (black background) ── */
+        .topbar {
+            background: rgba(20, 18, 16, 0.85);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            color: #fff;
+            font-size: 11px;
+            letter-spacing: .08em;
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            padding: 9px 24px;
+            font-weight: 300;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .topbar span {
+            opacity: .9;
+        }
+        .topbar a {
+            color: #fff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            opacity: .9;
+            transition: opacity .2s;
+        }
+        .topbar a:hover {
+            opacity: 1;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 0 120px;
+            height: 70px;
+            background: transparent;
+            position: relative;
+        }
+
+        .logo {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo img {
+            max-height: 44px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+            transition: filter 0.3s ease;
+        }
+
+        .nav-links {
+            flex: 1;
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 2;
+        }
+        .nav-links a {
+            font-size: 12px;
+            letter-spacing: .14em;
+            color: var(--ink);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 400;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color .25s ease, transform .15s ease;
+        }
+
+        /* Underline effect using --blush */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1.5px;
+            background-color: var(--mauve);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--mauve);
+            transform: translateY(-1px);
+        }
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-icons {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            z-index: 2;
+        }
+        .nav-icons svg {
+            width: 19px;
+            height: 19px;
+            stroke: var(--ink);
+            fill: none;
+            stroke-width: 1.6;
+            cursor: pointer;
+            transition: opacity .25s, transform .2s, stroke .25s;
+        }
+        .nav-icons svg:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+            stroke: var(--blush);
+        }
+
+        /* ── Hamburger Button ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            position: relative;
+            z-index: 4;
+            -webkit-tap-highlight-color: transparent;
+            order: 1;
+            flex-shrink: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 1.8px;
+            background: var(--ink);
+            border-radius: 2px;
+            transition: transform .35s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity .3s ease;
+            transform-origin: center;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(6.8px) rotate(45deg);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-6.8px) rotate(-45deg);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('banner-bg-desktop.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: var(--cream);
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right,
+                    rgba(242, 237, 228, .85) 0%,
+                    rgba(242, 237, 228, .60) 35%,
+                    rgba(242, 237, 228, .20) 60%,
+                    transparent 80%);
+        }
+
+        /* ── Hero Content ── */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 120px;
+            max-width: 700px;
+        }
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .eyebrow-line {
+            width: 36px;
+            height: 1.5px;
+            background: var(--crimson);
+            opacity: .8;
+        }
+        .eyebrow-text {
+            font-size: 12px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--burgundy);
+            font-weight: 500;
+            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(42px, 5.2vw, 60px);
+            font-weight: 300;
+            line-height: 1.05;
+            color: var(--espresso);
+            margin-bottom: 16px;
+            letter-spacing: -.01em;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
+        }
+        .hero-headline em {
+            font-style: italic;
+            color: var(--crimson);
+        }
+
+        .hero-features {
+            font-size: 13px;
+            letter-spacing: .12em;
+            color: var(--charcoal);
+            margin-bottom: 32px;
+            font-weight: 400;
+            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5);
+            opacity: .9;
+        }
+
+        /* ══════════════════════════════════════════════
+           ENHANCED CTA BUTTON — PRIMARY ONLY
+           ══════════════════════════════════════════════ */
+
+        .hero-cta-group {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .hero-cta-primary {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 42px;
+            font-family: 'Jost', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 3px;
+            min-width: 180px;
+            transition: all .35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            overflow: hidden;
+            outline: none;
+            background: linear-gradient(135deg, var(--espresso) 0%, var(--espresso-light) 60%, #3A352F 100%);
+            color: var(--ivory);
+            border: none;
+            box-shadow:
+                0 4px 20px rgba(28, 26, 24, 0.22),
+                0 1px 4px rgba(28, 26, 24, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .hero-cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -80%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(100deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.10) 40%,
+                    rgba(255, 255, 255, 0.16) 50%,
+                    rgba(255, 255, 255, 0.10) 60%,
+                    transparent 100%);
+            transform: skewX(-20deg);
+            transition: left .7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-cta-primary:hover {
+            background: linear-gradient(135deg, var(--crimson-dark) 0%, var(--crimson) 50%, var(--crimson-light) 100%);
+            transform: translateY(-3px);
+            box-shadow:
+                0 12px 32px rgba(138, 31, 45, 0.35),
+                0 4px 12px rgba(138, 31, 45, 0.22),
+                0 1px 4px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-cta-primary:hover::before {
+            left: 120%;
+        }
+
+        .hero-cta-primary:hover .btn-label {
+            transform: translateX(-4px);
+        }
+
+        .hero-cta-primary:active {
+            transform: translateY(-1px) scale(0.98);
+            box-shadow:
+                0 4px 12px rgba(138, 31, 45, 0.25),
+                0 1px 3px rgba(0, 0, 0, 0.15);
+            transition-duration: .1s;
+        }
+
+        .btn-label {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform .35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .btn-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            transition: transform .35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity .25s ease;
+            opacity: 0;
+            transform: translateX(-8px);
+            flex-shrink: 0;
+        }
+        .btn-arrow svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .hero-cta-primary:hover .btn-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .hero-cta-primary:focus-visible {
+            outline: 3px solid var(--crimson);
+            outline-offset: 3px;
+            box-shadow:
+                0 0 0 6px rgba(138, 31, 45, 0.15),
+                0 8px 24px rgba(28, 26, 24, 0.25);
+        }
+
+        /* ── Spacer for demo ── */
+        .demo-spacer {
+            height: 200vh;
+        }
+
+        /* ══════════════════════════════════════════════
+           RESPONSIVE NAVBAR — MOBILE
+           ══════════════════════════════════════════════ */
+
+        /* ── Tablet (≤1024px) ── */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 0 48px;
+            }
+            .hero-content {
+                padding: 0 48px;
+            }
+            .nav-links {
+                gap: 24px;
+            }
+            .logo img {
+                max-height: 38px;
+            }
+        }
+
+        /* ── Mobile (≤768px) ── */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 20px;
+                height: 64px;
+                justify-content: space-between;
+                gap: 0;
+                flex-wrap: nowrap;
+            }
+
+            .hamburger {
+                display: flex;
+                order: 1;
+                flex: 0 0 auto;
+                margin-right: 0;
+            }
+
+            .logo {
+                order: 2;
+                flex: 1 1 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 8px;
+            }
+
+            .logo img {
+                max-height: 32px;
+                width: auto;
+            }
+
+            .nav-icons {
+                order: 3;
+                flex: 0 0 auto;
+                gap: 14px;
+                justify-content: flex-end;
+            }
+            .nav-icons svg {
+                width: 17px;
+                height: 17px;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                padding: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                    padding 0.35s ease;
+                z-index: 3;
+                pointer-events: none;
+                opacity: 0;
+                transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity 0.3s ease,
+                    padding 0.35s ease;
+            }
+
+            .nav-links.open {
+                max-height: 400px;
+                padding: 16px 20px 24px;
+                pointer-events: auto;
+                opacity: 1;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                opacity: 0;
+                transform: translateY(12px);
+                transition: opacity .35s ease,
+                    transform .35s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .nav-links.open li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .nav-links.open li:nth-child(1) { transition-delay: .05s; }
+            .nav-links.open li:nth-child(2) { transition-delay: .10s; }
+            .nav-links.open li:nth-child(3) { transition-delay: .15s; }
+            .nav-links.open li:nth-child(4) { transition-delay: .20s; }
+            .nav-links.open li:nth-child(5) { transition-delay: .25s; }
+
+            .nav-links a {
+                display: block;
+                padding: 14px 16px;
+                font-size: 12px;
+                letter-spacing: .18em;
+                text-transform: uppercase;
+                color: var(--ink);
+                text-decoration: none;
+                transition: color .25s, background .25s, letter-spacing .25s;
+                border-radius: 4px;
+                font-weight: 400;
+                position: relative;
+            }
+            .nav-links a::after {
+                bottom: 10px;
+            }
+            .nav-links a:hover {
+                color: var(--blush);
+                background: rgba(219, 179, 168, 0.05); /* blush with alpha */
+                letter-spacing: .22em;
+                transform: none;
+                opacity: 1;
+            }
+            .nav-links a:active {
+                background: rgba(219, 179, 168, 0.1);
+            }
+
+            .menu-backdrop {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.3);
+                z-index: -1;
+                opacity: 0;
+                transition: opacity .35s ease;
+                pointer-events: none;
+            }
+            .menu-backdrop.active {
+                opacity: 1;
+                pointer-events: auto;
+                display: block;
+            }
+
+            .topbar {
+                gap: 18px;
+                font-size: 10px;
+                padding: 7px 16px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .topbar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 0 32px;
+                max-width: 100%;
+            }
+            .hero-headline {
+                font-size: clamp(32px, 6vw, 42px);
+            }
+            .hero-features {
+                font-size: 11px;
+            }
+
+            .hero-cta-primary {
+                padding: 14px 32px;
+                font-size: 11px;
+                letter-spacing: .12em;
+                min-width: 150px;
+                flex: 1 1 auto;
+                justify-content: center;
+                gap: 8px;
+            }
+            .btn-arrow { width: 14px; height: 14px; }
+            .btn-arrow svg { width: 13px; height: 13px; }
+            .btn-label { gap: 8px; }
+        }
+
+        /* ── Small Mobile (≤480px) ── */
+        @media (max-width: 480px) {
+            nav {
+                padding: 0 12px;
+                height: 58px;
+            }
+
+            .hamburger {
+                width: 38px;
+                height: 38px;
+                padding: 8px;
+                gap: 4px;
+            }
+            .hamburger span {
+                width: 19px;
+                height: 1.6px;
+            }
+            .hamburger.active span:nth-child(1) { transform: translateY(5.6px) rotate(45deg); }
+            .hamburger.active span:nth-child(3) { transform: translateY(-5.6px) rotate(-45deg); }
+
+            .logo img {
+                max-height: 28px;
+            }
+
+            .nav-icons { gap: 12px; }
+            .nav-icons svg { width: 15px; height: 15px; }
+
+            .nav-links.open {
+                padding: 12px 16px 20px;
+            }
+            .nav-links a {
+                padding: 12px 12px;
+                font-size: 10px;
+                letter-spacing: .14em;
+            }
+
+            .hero-content {
+                padding: 0 16px;
+                max-width: 100%;
+            }
+            .hero-headline { font-size: clamp(28px, 7vw, 36px); }
+            .hero-features { font-size: 10px; letter-spacing: .08em; }
+
+            .hero-cta-group { width: 100%; }
+            .hero-cta-primary {
+                padding: 14px 20px;
+                font-size: 10px;
+                letter-spacing: .10em;
+                width: 100%;
+                justify-content: center;
+                min-width: unset;
+                gap: 6px;
+            }
+            .btn-arrow { width: 12px; height: 12px; }
+            .btn-arrow svg { width: 11px; height: 11px; stroke-width: 2.2; }
+            .btn-label { gap: 6px; }
+
+            .topbar { gap: 10px; font-size: 9px; padding: 6px 12px; }
+        }
+
+        /* ── Very Small (≤360px) ── */
+        @media (max-width: 360px) {
+            nav { padding: 0 8px; height: 54px; }
+
+            .hamburger { width: 34px; height: 34px; padding: 7px; }
+            .hamburger span { width: 17px; height: 1.5px; }
+            .hamburger.active span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+            .hamburger.active span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+            .logo img { max-height: 24px; }
+            .nav-icons { gap: 10px; }
+            .nav-icons svg { width: 14px; height: 14px; }
+
+            .nav-links a {
+                padding: 10px 10px;
+                font-size: 9px;
+                letter-spacing: .12em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── Fixed Header ─── -->
+    <header class="site-header" id="siteHeader">
+        <!-- Top Bar (black) -->
+        <div class="topbar">
+            <span>Free Shipping</span>
+            <span><a href="#">Early Entry: Launch Giveaway</a></span>
+            <span>45-Day Returns</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav>
+            <!-- Hamburger Button (mobile only) -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Nav Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Giveaway</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+
+            <!-- Logo (image) -->
+            <div class="logo">
+                <img src="logo.png" alt="mea logo" />
+            </div>
+
+            <!-- Icons -->
+            <div class="nav-icons">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="7" r="4" />
+                    <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
+                </svg>
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Backdrop -->
+        <div class="menu-backdrop" id="menuBackdrop"></div>
+    </header>
+
+    <!-- ─── Hero Banner ─── -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="eyebrow-line"></span>
+                <span class="eyebrow-text">Designed for Her</span>
+            </div>
+            <h1 class="hero-headline">
+                The Only Suit<br />
+                For <em>Female</em><br />
+                Funeral Directors
+            </h1>
+
+            <p class="hero-features">REAL POCKETS · DURABLE STRETCH MATERIAL · CUSTOM SIZING</p>
+
+            <!-- ─── Single CTA Button (Primary) ─── -->
+            <div class="hero-cta-group">
+                <a class="hero-cta-primary" href="#">
+                    <span class="btn-label">
+                        Enter Giveaway
+                        <span class="btn-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="4" y1="12" x2="20" y2="12" />
+                                <polyline points="13 5 20 12 13 19" />
+                            </svg>
+                        </span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Dummy content ─── -->
+    <div class="demo-spacer"></div>
+
+    <!-- ─── JavaScript: Header Visibility, Mobile Menu, Smooth Scrolling ─── -->
+    <script>
+        (function() {
+            // ─── Header show/hide on scroll ───
+            const header = document.getElementById('siteHeader');
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const navLinks = document.getElementById('navLinks');
+            const menuBackdrop = document.getElementById('menuBackdrop');
+            const SCROLL_THRESHOLD = 80;
+            let isMenuOpen = false;
+
+            function toggleHeader() {
+                if (window.scrollY > SCROLL_THRESHOLD) {
+                    header.classList.add('visible');
+                } else {
+                    header.classList.remove('visible');
+                    closeMenu();
+                }
+            }
+
+            toggleHeader();
+            window.addEventListener('scroll', toggleHeader, { passive: true });
+
+            // ─── Mobile Menu Toggle ───
+            function openMenu() {
+                isMenuOpen = true;
+                hamburgerBtn.classList.add('active');
+                navLinks.classList.add('open');
+                menuBackdrop.classList.add('active');
+                hamburgerBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMenu() {
+                isMenuOpen = false;
+                hamburgerBtn.classList.remove('active');
+                navLinks.classList.remove('open');
+                menuBackdrop.classList.remove('active');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+
+            hamburgerBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (isMenuOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            menuBackdrop.addEventListener('click', closeMenu);
+
+            navLinks.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    closeMenu();
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && isMenuOpen) {
+                    closeMenu();
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && isMenuOpen) {
+                    closeMenu();
+                }
+            });
+
+            // ─── Ultra-Smooth Mac-like Scrolling ───
+            if (!('ontouchstart' in window) && !navigator.msMaxTouchPoints) {
+                let currentScroll = window.scrollY;
+                let targetScroll = window.scrollY;
+                let isAnimating = false;
+                const ease = 0.08;
+
+                function maxScroll() {
+                    return document.documentElement.scrollHeight - window.innerHeight;
+                }
+
+                function clamp(value, min, max) {
+                    return Math.min(Math.max(value, min), max);
+                }
+
+                function updateScroll() {
+                    if (isAnimating) return;
+                    isAnimating = true;
+
+                    function step() {
+                        const difference = targetScroll - currentScroll;
+                        if (Math.abs(difference) < 0.5) {
+                            currentScroll = targetScroll;
+                            window.scrollTo(0, currentScroll);
+                            isAnimating = false;
+                            return;
+                        }
+
+                        currentScroll += difference * ease;
+                        window.scrollTo(0, currentScroll);
+                        requestAnimationFrame(step);
+                    }
+
+                    requestAnimationFrame(step);
+                }
+
+                window.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    targetScroll = clamp(targetScroll + e.deltaY, 0, maxScroll());
+                    updateScroll();
+                }, { passive: false });
+
+                window.addEventListener('scroll', function() {
+                    if (!isAnimating) {
+                        currentScroll = window.scrollY;
+                        targetScroll = window.scrollY;
+                    }
+                }, { passive: true });
+
+                window.addEventListener('keydown', function(e) {
+                    const keys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', ' ', 'Home', 'End'];
+                    if (keys.includes(e.key)) {
+                        e.preventDefault();
+                        const viewportHeight = window.innerHeight;
+                        let newTarget = targetScroll;
+
+                        switch (e.key) {
+                            case 'ArrowDown': newTarget = clamp(targetScroll + 100, 0, maxScroll()); break;
+                            case 'ArrowUp': newTarget = clamp(targetScroll - 100, 0, maxScroll()); break;
+                            case 'PageDown': newTarget = clamp(targetScroll + viewportHeight * 0.9, 0, maxScroll()); break;
+                            case 'PageUp': newTarget = clamp(targetScroll - viewportHeight * 0.9, 0, maxScroll()); break;
+                            case ' ': newTarget = clamp(targetScroll + viewportHeight * 0.9, 0, maxScroll()); break;
+                            case 'Home': newTarget = 0; break;
+                            case 'End': newTarget = maxScroll(); break;
+                        }
+
+                        if (newTarget !== targetScroll) {
+                            targetScroll = newTarget;
+                            updateScroll();
+                        }
+                    }
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>
