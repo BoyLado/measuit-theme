@@ -210,6 +210,11 @@
             stroke: var(--blush);
         }
 
+        /* ── Close button hidden on desktop ── */
+        .nav-links .close-btn-li {
+            display: none;
+        }
+
         /* Hamburger */
         .hamburger {
             display: none;
@@ -444,6 +449,228 @@
             box-shadow:
                 0 0 0 6px rgba(138, 31, 45, 0.15),
                 0 8px 24px rgba(28, 26, 24, 0.25);
+        }
+
+        /* ── What Makes Mea Different (Story Section) ── */
+        .story-different {
+            padding: 80px 0 100px;
+            background: var(--ivory);
+            overflow: hidden;
+        }
+
+        .story-different .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 120px;
+        }
+
+        .story-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .story-header .eyebrow-line {
+            display: inline-block;
+            width: 40px;
+            height: 1.5px;
+            background: var(--crimson);
+            opacity: .6;
+            margin-bottom: 10px;
+        }
+
+        .story-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: clamp(32px, 4vw, 48px);
+            color: var(--espresso);
+            letter-spacing: -.01em;
+            margin-top: 8px;
+        }
+
+        .story-header h2 em {
+            font-style: italic;
+            color: var(--crimson);
+        }
+
+        .story-block {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .story-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-block.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .story-image {
+            flex: 1 1 45%;
+            aspect-ratio: 4 / 3;
+            background: var(--cream);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-image:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+        }
+
+        .story-image .image-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            color: var(--espresso);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 20px;
+            opacity: 0.8;
+            z-index: 3;
+        }
+
+        /* ── Image hover wrapper for all blocks ── */
+        .story-image .image-hover-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .story-image .image-hover-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .story-image .image-hover-wrapper .default-img {
+            opacity: 1;
+        }
+
+        .story-image .image-hover-wrapper .hover-img {
+            opacity: 0;
+        }
+
+        .story-image:hover .image-hover-wrapper .default-img {
+            opacity: 0;
+        }
+
+        .story-image:hover .image-hover-wrapper .hover-img {
+            opacity: 1;
+        }
+
+        /* Subtle overlay for all images */
+        .story-image .image-hover-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.15);
+            z-index: 2;
+            pointer-events: none;
+            transition: background 0.4s ease;
+        }
+
+        .story-image:hover .image-hover-wrapper::after {
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        .story-content {
+            flex: 1 1 45%;
+        }
+
+        .story-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--blush);
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+        }
+
+        .story-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(28px, 3vw, 36px);
+            font-weight: 400;
+            color: var(--espresso);
+            margin-bottom: 16px;
+            letter-spacing: -.01em;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .badge-new {
+            display: inline-block;
+            background: var(--crimson);
+            color: #fff;
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 2px 14px;
+            border-radius: 20px;
+            line-height: 1.6;
+        }
+
+        .story-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--charcoal);
+            font-weight: 300;
+            max-width: 480px;
+        }
+
+        .story-content .feature-list {
+            list-style: none;
+            margin-top: 16px;
+            padding: 0;
+        }
+
+        .story-content .feature-list li {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--espresso);
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .story-content .feature-list li::before {
+            content: '—';
+            color: var(--crimson);
+            opacity: 0.5;
+            font-weight: 300;
         }
 
         /* ── Testimonials ── */
@@ -714,6 +941,13 @@
                 flex: 0 0 50%;
                 padding: 0 12px;
             }
+
+            .story-different .container {
+                padding: 0 48px;
+            }
+            .story-block {
+                gap: 40px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -777,14 +1011,14 @@
                 display: flex;
                 align-items: center;
                 justify-content: flex-end;
-                gap: 12px;
+                gap: 18px;
                 justify-self: end;
                 flex: none;
             }
             .nav-icons svg {
-                width: 18px;
-                height: 18px;
-                stroke-width: 1.8;
+                width: 22px;
+                height: 22px;
+                stroke-width: 1.6;
                 padding: 2px;
                 box-sizing: content-box;
                 transition: stroke .25s, transform .2s, opacity .25s;
@@ -798,92 +1032,134 @@
                 transform: scale(0.95);
             }
 
+            /* ── Mobile Menu: Slide from Top, Full Height ── */
             .nav-links {
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 0;
                 left: 0;
-                right: 0;
                 width: 100%;
+                height: 100dvh;
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
                 gap: 0;
-                padding: 0;
+                padding: 20px;
                 background: rgba(255, 255, 255, 0.95);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
-                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                    opacity 0.3s ease,
-                    padding 0.35s ease;
-                z-index: 3;
+                border: none;
+                box-shadow: 0 4px 40px rgba(0, 0, 0, 0.12);
+                transform: translateY(-100%);
+                transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                            opacity 0.3s ease;
+                z-index: 5;
                 pointer-events: none;
                 opacity: 0;
+                overflow-y: auto;
+                will-change: transform;
             }
-            .nav-links.open {
-                max-height: 400px;
-                padding: 16px 20px 24px;
-                pointer-events: auto;
+
+            /* ── Show close button only on mobile ── */
+            .nav-links .close-btn-li {
+                display: block;
+                position: absolute;
+                top: 16px;
+                right: 20px;
+                width: auto;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                z-index: 10;
+            }
+            .nav-links .close-btn-li button {
+                font-size: 28px;
+                font-weight: 300;
+                color: var(--ink);
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 8px 8px 4px 8px;
+                line-height: 1;
+                display: block;
+                opacity: 0.8;
+                transition: opacity 0.2s, transform 0.2s;
+            }
+            .nav-links .close-btn-li button:hover {
                 opacity: 1;
+                transform: scale(1.1);
             }
-            .nav-links li {
+            .nav-links .close-btn-li button:active {
+                transform: scale(0.9);
+            }
+
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-links li:not(.close-btn-li) {
                 width: 100%;
                 text-align: center;
                 opacity: 0;
-                transform: translateY(12px);
-                transition: opacity .35s ease,
-                    transform .35s cubic-bezier(0.22, 1, 0.36, 1);
+                transform: translateY(20px);
+                transition: opacity .4s ease, transform .4s cubic-bezier(0.22, 1, 0.36, 1);
+                list-style: none;
             }
-            .nav-links.open li {
+            .nav-links.open li:not(.close-btn-li) {
                 opacity: 1;
                 transform: translateY(0);
             }
-            .nav-links.open li:nth-child(1) {
-                transition-delay: .05s;
-            }
-            .nav-links.open li:nth-child(2) {
-                transition-delay: .10s;
-            }
-            .nav-links.open li:nth-child(3) {
-                transition-delay: .15s;
-            }
-            .nav-links.open li:nth-child(4) {
-                transition-delay: .20s;
-            }
-            .nav-links.open li:nth-child(5) {
-                transition-delay: .25s;
-            }
+            .nav-links.open li:not(.close-btn-li):nth-child(2) { transition-delay: .06s; }
+            .nav-links.open li:not(.close-btn-li):nth-child(3) { transition-delay: .12s; }
+            .nav-links.open li:not(.close-btn-li):nth-child(4) { transition-delay: .18s; }
+            .nav-links.open li:not(.close-btn-li):nth-child(5) { transition-delay: .24s; }
+            .nav-links.open li:not(.close-btn-li):nth-child(6) { transition-delay: .30s; }
 
             .nav-links a {
                 display: block;
-                padding: 14px 16px;
-                font-size: 12px;
-                letter-spacing: .18em;
+                padding: 18px 12px;
+                font-size: 18px;
+                letter-spacing: .16em;
                 text-transform: uppercase;
                 color: var(--ink);
                 text-decoration: none;
-                transition: color .25s, background .25s, letter-spacing .25s;
-                border-radius: 4px;
                 font-weight: 400;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                transition: color .25s, background .25s, padding-left .25s;
+                border-radius: 4px;
             }
             .nav-links a:hover,
             .nav-links a:focus {
-                color: var(--blush);
-                background: rgba(219, 179, 168, 0.05);
+                color: var(--crimson);
+                background: rgba(138, 31, 45, 0.04);
+                padding-left: 18px;
                 outline: none;
             }
+            .nav-links a::after {
+                display: none;
+            }
 
+            /* ── Header solid background when menu is open ── */
+            .site-header.menu-open {
+                background: #ffffff !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            }
+
+            /* ── Backdrop overlay ── */
             .menu-backdrop {
                 display: none;
                 position: fixed;
                 inset: 0;
-                background: rgba(0, 0, 0, 0.3);
-                z-index: -1;
+                background: rgba(0, 0, 0, 0.35);
+                z-index: 4;
                 opacity: 0;
                 transition: opacity .35s ease;
                 pointer-events: none;
+                backdrop-filter: blur(2px);
+                -webkit-backdrop-filter: blur(2px);
             }
             .menu-backdrop.active {
                 opacity: 1;
@@ -926,6 +1202,31 @@
             }
             .btn-label {
                 gap: 8px;
+            }
+
+            .story-different {
+                padding: 60px 0 80px;
+            }
+            .story-different .container {
+                padding: 0 32px;
+            }
+            .story-header {
+                margin-bottom: 48px;
+            }
+            .story-block {
+                flex-direction: column !important;
+                gap: 24px;
+                margin-bottom: 56px;
+            }
+            .story-image {
+                width: 100%;
+                aspect-ratio: 4 / 3;
+            }
+            .story-content {
+                width: 100%;
+            }
+            .story-content p {
+                max-width: 100%;
             }
 
             .testimonials {
@@ -1019,12 +1320,25 @@
                 max-height: 28px;
             }
             .nav-icons {
-                gap: 10px;
+                gap: 16px;
             }
             .nav-icons svg {
-                width: 16px;
-                height: 16px;
+                width: 20px;
+                height: 20px;
                 padding: 1px;
+            }
+
+            .nav-links .close-btn-li {
+                top: 12px;
+                right: 16px;
+            }
+            .nav-links .close-btn-li button {
+                font-size: 24px;
+                padding: 6px 6px 2px 6px;
+            }
+            .nav-links a {
+                font-size: 16px;
+                padding: 16px 10px;
             }
 
             .hero-content {
@@ -1052,6 +1366,19 @@
             }
             .btn-label {
                 gap: 6px;
+            }
+
+            .story-different .container {
+                padding: 0 16px;
+            }
+            .story-number {
+                font-size: 36px;
+            }
+            .story-content h3 {
+                font-size: 24px;
+            }
+            .story-content p {
+                font-size: 14px;
             }
 
             .topbar {
@@ -1142,15 +1469,32 @@
                 max-height: 24px;
             }
             .nav-icons {
-                gap: 8px;
+                gap: 14px;
             }
             .nav-icons svg {
-                width: 14px;
-                height: 14px;
+                width: 18px;
+                height: 18px;
                 padding: 0;
             }
 
+            .nav-links .close-btn-li {
+                top: 10px;
+                right: 12px;
+            }
+            .nav-links .close-btn-li button {
+                font-size: 22px;
+                padding: 4px 4px 0 4px;
+            }
+            .nav-links a {
+                font-size: 14px;
+                padding: 14px 8px;
+            }
+
             .hero-content {
+                padding: 0 12px;
+            }
+
+            .story-different .container {
                 padding: 0 12px;
             }
 
@@ -1187,6 +1531,10 @@
                 <span></span>
             </button>
             <ul class="nav-links" id="navLinks">
+                <!-- Close Button (mobile only) -->
+                <li class="close-btn-li">
+                    <button id="closeNavBtn" aria-label="Close navigation">✕</button>
+                </li>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Giveaway</a></li>
@@ -1234,6 +1582,88 @@
                 <a class="hero-cta-primary" href="#">
                     <span class="btn-label">Enter Giveaway</span>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── What Makes Mea Different (Story Section) ─── -->
+    <section class="story-different" id="storySection">
+        <div class="container">
+            <div class="story-header">
+                <div class="eyebrow-line"></div>
+                <h2>What Makes <em>Mea</em> Different</h2>
+            </div>
+
+            <!-- Block 1: Custom Fit -->
+            <div class="story-block">
+                <div class="story-image custom-fit">
+                    <div class="image-hover-wrapper">
+                        <img src="1-img1.png" alt="Custom Fit - default" class="default-img" loading="lazy">
+                        <img src="1-img1.png" alt="Custom Fit - hover" class="hover-img" loading="lazy">
+                    </div>
+                    <span class="image-tag">01</span>
+                </div>
+                <div class="story-content">
+                    <div class="story-number">01</div>
+                    <h3>Custom Fit</h3>
+                    <p>Get your first suit in a modified standard size. Provide feedback to build your custom size that perfectly contours to your body.</p>
+                </div>
+            </div>
+
+            <!-- Block 2: Real Pockets -->
+            <div class="story-block reverse">
+                <div class="story-image real-pockets">
+                    <div class="image-hover-wrapper">
+                        <img src="1-img1.png" alt="Real Pockets - default" class="default-img" loading="lazy">
+                        <img src="1-img1.png" alt="Real Pockets - hover" class="hover-img" loading="lazy">
+                    </div>
+                    <span class="image-tag">02</span>
+                </div>
+                <div class="story-content">
+                    <div class="story-number">02</div>
+                    <h3>Real Pockets</h3>
+                    <p>We include real pockets inside and outside your suit jacket + on pants/skirts, so you don't have to carry a bag on the go.</p>
+                    <ul class="feature-list">
+                        <li>Inside jacket pockets</li>
+                        <li>Outside pant/skirt pockets</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Block 3: Durable + Stretch Fabric -->
+            <div class="story-block">
+                <div class="story-image stretch-fabric">
+                    <div class="image-hover-wrapper">
+                        <img src="1-img1.png" alt="Stretch Fabric - default" class="default-img" loading="lazy">
+                        <img src="1-img1.png" alt="Stretch Fabric - hover" class="hover-img" loading="lazy">
+                    </div>
+                    <span class="image-tag">03</span>
+                </div>
+                <div class="story-content">
+                    <div class="story-number">03</div>
+                    <h3>Durable + Stretch Fabric</h3>
+                    <p>Our signature stretch fabric is 8% spandex for high flexibility. You'll love the way this suit feels — it moves with you, never against you.</p>
+                </div>
+            </div>
+
+            <!-- Block 4: Built Smart -->
+            <div class="story-block reverse">
+                <div class="story-image built-smart">
+                    <div class="image-hover-wrapper">
+                        <img src="1-img1.png" alt="Built Smart - default" class="default-img" loading="lazy">
+                        <img src="1-img1.png" alt="Built Smart - hover" class="hover-img" loading="lazy">
+                    </div>
+                    <span class="image-tag">04</span>
+                </div>
+                <div class="story-content">
+                    <div class="story-number">04</div>
+                    <h3>Built Smart <span class="badge-new">New</span></h3>
+                    <p>Our jackets are only partially lined to give more flexibility in the upper back and breathe more. We add an elastic adjuster in the waistband so your pants fit any time of the month.</p>
+                    <ul class="feature-list">
+                        <li>Partial lining for flexibility</li>
+                        <li>Elastic waistband adjuster</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -1357,22 +1787,21 @@
             const hamburgerBtn = document.getElementById('hamburgerBtn');
             const navLinks = document.getElementById('navLinks');
             const menuBackdrop = document.getElementById('menuBackdrop');
+            const closeNavBtn = document.getElementById('closeNavBtn');
             const hero = document.getElementById('heroSection');
-            const SCROLL_THRESHOLD = 80; // for blur
+            const SCROLL_THRESHOLD = 80;
 
             let isMenuOpen = false;
             let heroHeight = hero.offsetHeight;
 
-            // ─── Cache hero height on resize ───
             function updateHeroHeight() {
                 heroHeight = hero.offsetHeight;
             }
             window.addEventListener('resize', updateHeroHeight, { passive: true });
 
-            // ─── Topbar hide on 50% of hero ───
             function updateTopbar() {
                 const scrollY = window.scrollY;
-                const threshold = heroHeight * 0.5; // Changed to 50%
+                const threshold = heroHeight * 0.5;
                 if (scrollY > threshold) {
                     header.classList.add('topbar-hidden');
                 } else {
@@ -1380,13 +1809,11 @@
                 }
             }
 
-            // ─── Header blur on scroll ───
             function toggleHeader() {
                 if (window.scrollY > SCROLL_THRESHOLD) {
                     header.classList.add('visible');
                 } else {
                     header.classList.remove('visible');
-                    closeMenu();
                 }
                 updateTopbar();
             }
@@ -1394,12 +1821,12 @@
             toggleHeader();
             window.addEventListener('scroll', toggleHeader, { passive: true });
 
-            // Menu functions
             function openMenu() {
                 isMenuOpen = true;
                 hamburgerBtn.classList.add('active');
                 navLinks.classList.add('open');
                 menuBackdrop.classList.add('active');
+                header.classList.add('menu-open');
                 hamburgerBtn.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden';
             }
@@ -1409,6 +1836,7 @@
                 hamburgerBtn.classList.remove('active');
                 navLinks.classList.remove('open');
                 menuBackdrop.classList.remove('active');
+                header.classList.remove('menu-open');
                 hamburgerBtn.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
@@ -1417,6 +1845,11 @@
                 e.stopPropagation();
                 if (isMenuOpen) { closeMenu(); } else { openMenu(); }
             });
+
+            // Close button inside the drawer
+            if (closeNavBtn) {
+                closeNavBtn.addEventListener('click', closeMenu);
+            }
 
             menuBackdrop.addEventListener('click', closeMenu);
             navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
