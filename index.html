@@ -2013,12 +2013,20 @@
                 const maxPos = Math.max(0, total - visible);
                 current = Math.min(Math.max(index, 0), maxPos);
                 const offset = current * (100 / visible);
-                track.style.transition = instant ? 'none' :
-                    'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
-                track.style.transform = 'translateX(-' + offset + '%)';
+
                 if (instant) {
-                    void track.offsetHeight;
+                    // Remove transition, apply transform, then restore transition without forcing a reflow
+                    track.style.transition = 'none';
+                    track.style.transform = 'translateX(-' + offset + '%)';
+                    // Use rAF to restore transition after the paint
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            track.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+                        });
+                    });
+                } else {
                     track.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+                    track.style.transform = 'translateX(-' + offset + '%)';
                 }
                 updateDots();
             }
