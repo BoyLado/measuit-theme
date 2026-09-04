@@ -41,6 +41,7 @@
             padding: 0;
         }
 
+        /* ── Header: fixed + smooth slide transition ── */
         .site-header {
             position: fixed;
             top: 0;
@@ -55,8 +56,22 @@
             -webkit-backdrop-filter: none;
             border-bottom: none;
             box-shadow: none;
-            transition: background 0.45s ease, box-shadow 0.45s ease,
-                border-bottom 0.45s ease, backdrop-filter 0.45s ease;
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.45s ease,
+                box-shadow 0.45s ease,
+                border-bottom 0.45s ease,
+                backdrop-filter 0.45s ease;
+        }
+
+        /* ── Header hidden state (slides up) ── */
+        .site-header.header-hidden {
+            transform: translateY(-100%);
+            pointer-events: none;
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.45s ease,
+                box-shadow 0.45s ease,
+                border-bottom 0.45s ease,
+                backdrop-filter 0.45s ease;
         }
 
         .site-header.visible {
@@ -300,6 +315,54 @@
             max-width: 700px;
         }
 
+        /* ══════════════════════════════════════════════
+           HERO ENTRANCE ANIMATIONS (AFTER PAGE LOAD)
+           ══════════════════════════════════════════════ */
+        .hero-eyebrow,
+        .hero-headline,
+        .hero-cta-group {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .hero-eyebrow {
+            animation-delay: 0.3s;
+        }
+
+        .hero-headline {
+            animation-delay: 0.55s;
+        }
+
+        .hero-cta-group {
+            animation-delay: 1.05s;
+        }
+
+        @keyframes heroFadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Hero Background subtle zoom animation ── */
+        .hero-bg {
+            animation: heroBgZoom 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes heroBgZoom {
+            0% {
+                transform: scale(1.12);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
         .hero-eyebrow {
             display: flex;
             align-items: center;
@@ -345,10 +408,23 @@
             text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5);
             opacity: .9;
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             align-items: center;
             gap: 0.6em;
+            white-space: nowrap;
         }
+
+        /* 👇 Staggered animation for each feature item */
+        .hero-features > * {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .hero-features > *:nth-child(1) { animation-delay: 0.8s; }
+        .hero-features > *:nth-child(2) { animation-delay: 0.9s; }
+        .hero-features > *:nth-child(3) { animation-delay: 1.0s; }
+        .hero-features > *:nth-child(4) { animation-delay: 1.1s; }
+        .hero-features > *:nth-child(5) { animation-delay: 1.2s; }
 
         .hero-features .separator {
             display: inline-block;
@@ -961,6 +1037,10 @@
             .story-block {
                 gap: 40px;
             }
+
+            .hero-features {
+                letter-spacing: .1em;
+            }
         }
 
         @media (max-width: 768px) {
@@ -972,6 +1052,8 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.4em;
+                flex-wrap: wrap;
+                white-space: normal;
             }
             .hero-features .separator {
                 display: none;
@@ -1064,7 +1146,7 @@
                 box-shadow: 0 4px 40px rgba(0, 0, 0, 0.12);
                 transform: translateY(-100%);
                 transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                            opacity 0.3s ease;
+                    opacity 0.3s ease;
                 z-index: 5;
                 pointer-events: none;
                 opacity: 0;
@@ -1123,11 +1205,21 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-            .nav-links.open li:not(.close-btn-li):nth-child(2) { transition-delay: .06s; }
-            .nav-links.open li:not(.close-btn-li):nth-child(3) { transition-delay: .12s; }
-            .nav-links.open li:not(.close-btn-li):nth-child(4) { transition-delay: .18s; }
-            .nav-links.open li:not(.close-btn-li):nth-child(5) { transition-delay: .24s; }
-            .nav-links.open li:not(.close-btn-li):nth-child(6) { transition-delay: .30s; }
+            .nav-links.open li:not(.close-btn-li):nth-child(2) {
+                transition-delay: .06s;
+            }
+            .nav-links.open li:not(.close-btn-li):nth-child(3) {
+                transition-delay: .12s;
+            }
+            .nav-links.open li:not(.close-btn-li):nth-child(4) {
+                transition-delay: .18s;
+            }
+            .nav-links.open li:not(.close-btn-li):nth-child(5) {
+                transition-delay: .24s;
+            }
+            .nav-links.open li:not(.close-btn-li):nth-child(6) {
+                transition-delay: .30s;
+            }
 
             .nav-links a {
                 display: block;
@@ -1803,6 +1895,7 @@
             const closeNavBtn = document.getElementById('closeNavBtn');
             const hero = document.getElementById('heroSection');
             const SCROLL_THRESHOLD = 80;
+            const HERO_HIDE_THRESHOLD = 0.9; // 90% of hero height
 
             let isMenuOpen = false;
             let heroHeight = hero.offsetHeight;
@@ -1812,28 +1905,61 @@
             }
             window.addEventListener('resize', updateHeroHeight, { passive: true });
 
-            function updateTopbar() {
+            // ── Track last scroll Y for direction detection ──
+            let lastScrollY = window.scrollY;
+            let isHeaderHidden = false;
+
+            function updateHeader() {
                 const scrollY = window.scrollY;
-                const threshold = heroHeight * 0.5;
-                if (scrollY > threshold) {
+                const threshold90 = heroHeight * HERO_HIDE_THRESHOLD;
+                const threshold50 = heroHeight * 0.5;
+
+                // Determine scroll direction
+                const scrollingDown = scrollY > lastScrollY;
+                const scrollingUp = scrollY < lastScrollY;
+
+                // ── Hide / Show logic based on direction and threshold ──
+                if (scrollingDown && scrollY > threshold90 && !isHeaderHidden) {
+                    // Scrolling down past 90% → hide header
+                    header.classList.add('header-hidden');
+                    isHeaderHidden = true;
+                } else if (scrollingUp && isHeaderHidden) {
+                    // Scrolling up anywhere → show header
+                    header.classList.remove('header-hidden');
+                    isHeaderHidden = false;
+                }
+
+                // ── Topbar hide/show at 50% (independent) ──
+                if (scrollY > threshold50) {
                     header.classList.add('topbar-hidden');
                 } else {
                     header.classList.remove('topbar-hidden');
                 }
-            }
 
-            function toggleHeader() {
-                if (window.scrollY > SCROLL_THRESHOLD) {
+                // ── Background blur (existing) ──
+                if (scrollY > SCROLL_THRESHOLD) {
                     header.classList.add('visible');
                 } else {
                     header.classList.remove('visible');
                 }
-                updateTopbar();
+
+                lastScrollY = scrollY;
             }
 
-            toggleHeader();
-            window.addEventListener('scroll', toggleHeader, { passive: true });
+            // ── Throttled scroll handler for performance ──
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                if (scrollTimeout) return;
+                scrollTimeout = requestAnimationFrame(function() {
+                    updateHeader();
+                    scrollTimeout = null;
+                });
+            }, { passive: true });
 
+            // ── Initial call ──
+            updateHeader();
+
+            // ── Mobile menu logic ──
             function openMenu() {
                 isMenuOpen = true;
                 hamburgerBtn.classList.add('active');
@@ -1908,7 +2034,8 @@
                 const maxPos = Math.max(0, total - visible);
                 current = Math.min(Math.max(index, 0), maxPos);
                 const offset = current * (100 / visible);
-                track.style.transition = instant ? 'none' : 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+                track.style.transition = instant ? 'none' :
+                    'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
                 track.style.transform = 'translateX(-' + offset + '%)';
                 if (instant) {
                     void track.offsetHeight;
@@ -2099,34 +2226,28 @@
                 });
             }
 
-            // ─── Auto-transition for Story Images (slow, one at a time) ───
+            // ─── Auto-transition for Story Images ───
             const storyImages = document.querySelectorAll('.story-image');
             if (storyImages.length > 0) {
                 let activeIndex = 0;
                 let storyInterval;
 
                 function activateImage(index) {
-                    // Remove active from all
                     storyImages.forEach(img => img.classList.remove('active'));
-                    // Add active to the current one
                     storyImages[index].classList.add('active');
                 }
 
                 function cycleStoryImages() {
-                    // Move to next
                     activeIndex = (activeIndex + 1) % storyImages.length;
                     activateImage(activeIndex);
                 }
 
-                // Start with first image active after a small delay
                 setTimeout(function() {
                     activateImage(0);
                 }, 400);
 
-                // Cycle every 4.5 seconds (slow, with 1.2s transition)
                 storyInterval = setInterval(cycleStoryImages, 4500);
 
-                // Pause auto-transition on hover (any story image)
                 const storyContainer = document.querySelector('.story-different .container');
                 if (storyContainer) {
                     storyContainer.addEventListener('mouseenter', function() {
@@ -2138,7 +2259,6 @@
                     }, { passive: true });
                 }
 
-                // Also pause on touch devices when interacting
                 storyContainer.addEventListener('touchstart', function() {
                     clearInterval(storyInterval);
                 }, { passive: true });
