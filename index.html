@@ -6,7 +6,6 @@
     <title>mea — Homepage Banner</title>
 
     <link rel="preload" as="image" href="banner-bg-desktop.webp" type="image/webp" />
-    <link rel="preload" as="image" href="banner-bg-mobile.webp" type="image/webp" />
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
     <style>
@@ -1046,7 +1045,7 @@
 
         @media (max-width: 768px) {
             .hero-bg {
-                background-image: url('banner-bg-mobile.webp');
+                background-image: url('banner-bg-mobile.png');
             }
 
             .hero-features {
@@ -1648,7 +1647,7 @@
                 <li><a href="#">Contact Us</a></li>
             </ul>
             <div class="logo">
-                <img src="logo.png" alt="mea logo" />
+                <img src="logo.png" alt="mea logo" fetchpriority="high" />
             </div>
             <div class="nav-icons">
                 <svg viewBox="0 0 24 24" aria-label="User account" role="img">
