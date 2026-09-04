@@ -64,7 +64,6 @@
                 backdrop-filter 0.45s ease;
         }
 
-        /* ── Header hidden state (slides up) ── */
         .site-header.header-hidden {
             transform: translateY(-100%);
             pointer-events: none;
@@ -83,7 +82,6 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
         }
 
-        /* ── Topbar with smooth hide transition ── */
         .topbar {
             background: rgba(20, 18, 16, 0.85);
             backdrop-filter: blur(4px);
@@ -226,12 +224,10 @@
             stroke: var(--blush);
         }
 
-        /* ── Close button hidden on desktop ── */
         .nav-links .close-btn-li {
             display: none;
         }
 
-        /* Hamburger */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -277,7 +273,6 @@
             transition-delay: 0.06s;
         }
 
-        /* ── Hero ── */
         .hero {
             position: relative;
             width: 100%;
@@ -316,9 +311,6 @@
             max-width: 700px;
         }
 
-        /* ══════════════════════════════════════════════
-           HERO ENTRANCE ANIMATIONS (AFTER PAGE LOAD)
-           ══════════════════════════════════════════════ */
         .hero-eyebrow,
         .hero-headline,
         .hero-cta-group {
@@ -350,7 +342,6 @@
             }
         }
 
-        /* ── Hero Background subtle zoom animation ── */
         .hero-bg {
             animation: heroBgZoom 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
@@ -415,17 +406,26 @@
             white-space: nowrap;
         }
 
-        /* 👇 Staggered animation for each feature item */
-        .hero-features > * {
+        .hero-features>* {
             opacity: 0;
             transform: translateY(30px);
             animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
-        .hero-features > *:nth-child(1) { animation-delay: 0.8s; }
-        .hero-features > *:nth-child(2) { animation-delay: 0.9s; }
-        .hero-features > *:nth-child(3) { animation-delay: 1.0s; }
-        .hero-features > *:nth-child(4) { animation-delay: 1.1s; }
-        .hero-features > *:nth-child(5) { animation-delay: 1.2s; }
+        .hero-features>*:nth-child(1) {
+            animation-delay: 0.8s;
+        }
+        .hero-features>*:nth-child(2) {
+            animation-delay: 0.9s;
+        }
+        .hero-features>*:nth-child(3) {
+            animation-delay: 1.0s;
+        }
+        .hero-features>*:nth-child(4) {
+            animation-delay: 1.1s;
+        }
+        .hero-features>*:nth-child(5) {
+            animation-delay: 1.2s;
+        }
 
         .hero-features .separator {
             display: inline-block;
@@ -528,7 +528,6 @@
                 0 8px 24px rgba(28, 26, 24, 0.25);
         }
 
-        /* ── What Makes Mea Different (Story Section) ── */
         .story-different {
             padding: 80px 0 100px;
             background: var(--ivory);
@@ -585,7 +584,6 @@
             flex-direction: row-reverse;
         }
 
-        /* ── Story Image ── */
         .story-image {
             flex: 1 1 45%;
             aspect-ratio: 4 / 3;
@@ -624,7 +622,6 @@
             z-index: 3;
         }
 
-        /* ── Image hover wrapper ── */
         .story-image .image-hover-wrapper {
             position: absolute;
             top: 0;
@@ -655,7 +652,6 @@
             opacity: 0;
         }
 
-        /* ── Hover state (manual) ── */
         .story-image:hover .image-hover-wrapper .default-img {
             opacity: 0;
         }
@@ -664,7 +660,6 @@
             opacity: 1;
         }
 
-        /* ── Auto-transition state (JS-driven) ── */
         .story-image.active .image-hover-wrapper .default-img {
             opacity: 0;
         }
@@ -673,7 +668,6 @@
             opacity: 1;
         }
 
-        /* Subtle overlay for all images */
         .story-image .image-hover-wrapper::after {
             content: '';
             position: absolute;
@@ -763,7 +757,6 @@
             font-weight: 300;
         }
 
-        /* ── Testimonials ── */
         .testimonials {
             position: relative;
             width: 100%;
@@ -1128,7 +1121,6 @@
                 transform: scale(0.95);
             }
 
-            /* ── Mobile Menu: Slide from Top, Full Height ── */
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -1155,7 +1147,6 @@
                 will-change: transform;
             }
 
-            /* ── Show close button only on mobile ── */
             .nav-links .close-btn-li {
                 display: block;
                 position: absolute;
@@ -1246,7 +1237,6 @@
                 display: none;
             }
 
-            /* ── Header solid background when menu is open ── */
             .site-header.menu-open {
                 background: #ffffff !important;
                 backdrop-filter: none !important;
@@ -1254,7 +1244,6 @@
                 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
             }
 
-            /* ── Backdrop overlay ── */
             .menu-backdrop {
                 display: none;
                 position: fixed;
@@ -1637,7 +1626,6 @@
                 <span></span>
             </button>
             <ul class="nav-links" id="navLinks">
-                <!-- Close Button (mobile only) -->
                 <li class="close-btn-li">
                     <button id="closeNavBtn" aria-label="Close navigation">✕</button>
                 </li>
@@ -1648,7 +1636,7 @@
                 <li><a href="#">Contact Us</a></li>
             </ul>
             <div class="logo">
-                <img src="logo.png" alt="mea logo" fetchpriority="high" />
+                <img src="logo.png" alt="mea logo" fetchpriority="high" width="120" height="44" />
             </div>
             <div class="nav-icons">
                 <svg viewBox="0 0 24 24" aria-label="User account" role="img">
@@ -1704,8 +1692,8 @@
             <div class="story-block">
                 <div class="story-image custom-fit" data-index="0">
                     <div class="image-hover-wrapper">
-                        <img src="1-img1.webp" alt="Custom Fit - default" class="default-img" loading="lazy">
-                        <img src="1-img2.webp" alt="Custom Fit - hover" class="hover-img" loading="lazy">
+                        <img src="1-img1.webp" alt="Custom Fit - default" class="default-img" loading="lazy" width="640" height="480" />
+                        <img src="1-img2.webp" alt="Custom Fit - hover" class="hover-img" loading="lazy" width="640" height="480" />
                     </div>
                     <span class="image-tag">01</span>
                 </div>
@@ -1720,8 +1708,8 @@
             <div class="story-block reverse">
                 <div class="story-image real-pockets" data-index="1">
                     <div class="image-hover-wrapper">
-                        <img src="2-img1.webp" alt="Real Pockets - default" class="default-img" loading="lazy">
-                        <img src="2-img2.webp" alt="Real Pockets - hover" class="hover-img" loading="lazy">
+                        <img src="2-img1.webp" alt="Real Pockets - default" class="default-img" loading="lazy" width="640" height="480" />
+                        <img src="2-img2.webp" alt="Real Pockets - hover" class="hover-img" loading="lazy" width="640" height="480" />
                     </div>
                     <span class="image-tag">02</span>
                 </div>
@@ -1740,8 +1728,8 @@
             <div class="story-block">
                 <div class="story-image stretch-fabric" data-index="2">
                     <div class="image-hover-wrapper">
-                        <img src="3-img1.webp" alt="Stretch Fabric - default" class="default-img" loading="lazy">
-                        <img src="3-img2.webp" alt="Stretch Fabric - hover" class="hover-img" loading="lazy">
+                        <img src="3-img1.webp" alt="Stretch Fabric - default" class="default-img" loading="lazy" width="640" height="480" />
+                        <img src="3-img2.webp" alt="Stretch Fabric - hover" class="hover-img" loading="lazy" width="640" height="480" />
                     </div>
                     <span class="image-tag">03</span>
                 </div>
@@ -1756,8 +1744,8 @@
             <div class="story-block reverse">
                 <div class="story-image built-smart" data-index="3">
                     <div class="image-hover-wrapper">
-                        <img src="4-img1.webp" alt="Built Smart - default" class="default-img" loading="lazy">
-                        <img src="4-img2.webp" alt="Built Smart - hover" class="hover-img" loading="lazy">
+                        <img src="4-img1.webp" alt="Built Smart - default" class="default-img" loading="lazy" width="640" height="480" />
+                        <img src="4-img2.webp" alt="Built Smart - hover" class="hover-img" loading="lazy" width="640" height="480" />
                     </div>
                     <span class="image-tag">04</span>
                 </div>
@@ -1788,7 +1776,7 @@
                     <div class="testimonial-card" role="group" aria-label="Testimonial 1 of 6">
                         <div class="testimonial-card-inner">
                             <div class="testimonial-photo">
-                                <img src="test1.png" alt="Sarah Mitchell" />
+                                <img src="test1.png" alt="Sarah Mitchell" width="80" height="80" />
                             </div>
                             <div class="testimonial-stars">
                                 <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -1802,7 +1790,7 @@
                     <div class="testimonial-card" role="group" aria-label="Testimonial 2 of 6">
                         <div class="testimonial-card-inner">
                             <div class="testimonial-photo">
-                                <img src="test1.png" alt="Jessica Park" />
+                                <img src="test1.png" alt="Jessica Park" width="80" height="80" />
                             </div>
                             <div class="testimonial-stars">
                                 <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -1816,7 +1804,7 @@
                     <div class="testimonial-card" role="group" aria-label="Testimonial 3 of 6">
                         <div class="testimonial-card-inner">
                             <div class="testimonial-photo">
-                                <img src="test1.png" alt="Amanda Reyes" />
+                                <img src="test1.png" alt="Amanda Reyes" width="80" height="80" />
                             </div>
                             <div class="testimonial-stars">
                                 <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -1830,7 +1818,7 @@
                     <div class="testimonial-card" role="group" aria-label="Testimonial 4 of 6">
                         <div class="testimonial-card-inner">
                             <div class="testimonial-photo">
-                                <img src="test1.png" alt="Nicole Torres" />
+                                <img src="test1.png" alt="Nicole Torres" width="80" height="80" />
                             </div>
                             <div class="testimonial-stars">
                                 <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -1844,7 +1832,7 @@
                     <div class="testimonial-card" role="group" aria-label="Testimonial 5 of 6">
                         <div class="testimonial-card-inner">
                             <div class="testimonial-photo">
-                                <img src="test1.png" alt="Brittany Chen" />
+                                <img src="test1.png" alt="Brittany Chen" width="80" height="80" />
                             </div>
                             <div class="testimonial-stars">
                                 <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -1858,7 +1846,7 @@
                     <div class="testimonial-card" role="group" aria-label="Testimonial 6 of 6">
                         <div class="testimonial-card-inner">
                             <div class="testimonial-photo">
-                                <img src="test1.png" alt="Lauren Davis" />
+                                <img src="test1.png" alt="Lauren Davis" width="80" height="80" />
                             </div>
                             <div class="testimonial-stars">
                                 <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -1896,7 +1884,7 @@
             const closeNavBtn = document.getElementById('closeNavBtn');
             const hero = document.getElementById('heroSection');
             const SCROLL_THRESHOLD = 80;
-            const HERO_HIDE_THRESHOLD = 0.9; // 90% of hero height
+            const HERO_HIDE_THRESHOLD = 0.9;
 
             let isMenuOpen = false;
             let heroHeight = hero.offsetHeight;
@@ -1906,7 +1894,6 @@
             }
             window.addEventListener('resize', updateHeroHeight, { passive: true });
 
-            // ── Track last scroll Y for direction detection ──
             let lastScrollY = window.scrollY;
             let isHeaderHidden = false;
 
@@ -1915,29 +1902,23 @@
                 const threshold90 = heroHeight * HERO_HIDE_THRESHOLD;
                 const threshold50 = heroHeight * 0.5;
 
-                // Determine scroll direction
                 const scrollingDown = scrollY > lastScrollY;
                 const scrollingUp = scrollY < lastScrollY;
 
-                // ── Hide / Show logic based on direction and threshold ──
                 if (scrollingDown && scrollY > threshold90 && !isHeaderHidden) {
-                    // Scrolling down past 90% → hide header
                     header.classList.add('header-hidden');
                     isHeaderHidden = true;
                 } else if (scrollingUp && isHeaderHidden) {
-                    // Scrolling up anywhere → show header
                     header.classList.remove('header-hidden');
                     isHeaderHidden = false;
                 }
 
-                // ── Topbar hide/show at 50% (independent) ──
                 if (scrollY > threshold50) {
                     header.classList.add('topbar-hidden');
                 } else {
                     header.classList.remove('topbar-hidden');
                 }
 
-                // ── Background blur (existing) ──
                 if (scrollY > SCROLL_THRESHOLD) {
                     header.classList.add('visible');
                 } else {
@@ -1947,7 +1928,6 @@
                 lastScrollY = scrollY;
             }
 
-            // ── Throttled scroll handler for performance ──
             let scrollTimeout;
             window.addEventListener('scroll', function() {
                 if (scrollTimeout) return;
@@ -1957,10 +1937,8 @@
                 });
             }, { passive: true });
 
-            // ── Initial call ──
             updateHeader();
 
-            // ── Mobile menu logic ──
             function openMenu() {
                 isMenuOpen = true;
                 hamburgerBtn.classList.add('active');
