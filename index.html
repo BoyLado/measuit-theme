@@ -1292,11 +1292,11 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           SECTION 7 — HOW IT WORKS
+           SECTION 7 — HOW IT WORKS (UPDATED WITH ARROWS & CUSTOM ICONS)
            ═══════════════════════════════════════════════════════════════ */
         .how-it-works {
             position: relative;
-            padding: 90px 0 120px;
+            padding: 80px 0 100px;
             background: var(--ivory);
             overflow: hidden;
         }
@@ -1309,7 +1309,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.35;
+            opacity: 0.30;
             z-index: 0;
         }
 
@@ -1317,7 +1317,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             z-index: 0;
         }
 
@@ -1329,9 +1329,10 @@
             padding: 0 120px;
         }
 
+        /* ── Header ── */
         .how-it-works-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 56px;
         }
 
         .how-it-works-header .eyebrow-line {
@@ -1350,34 +1351,28 @@
             text-transform: uppercase;
             color: var(--charcoal);
             font-weight: 500;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
+        /* ── Updated h2 to match other sections ── */
         .how-it-works-header h2 {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 300;
             font-size: clamp(34px, 4.2vw, 50px);
             color: var(--espresso);
             letter-spacing: -0.01em;
-            margin-top: 4px;
+            margin-top: 8px;
         }
 
+        /* ── Steps Container ── */
         .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 48px;
             position: relative;
-        }
-
-        .steps-grid::before {
-            content: '';
-            position: absolute;
-            top: 52px;
-            left: 16.66%;
-            right: 16.66%;
-            height: 1.5px;
-            background: rgba(0, 0, 0, 0.08);
-            z-index: 0;
+            flex-wrap: nowrap;
         }
 
         .step {
@@ -1387,38 +1382,45 @@
             text-align: center;
             position: relative;
             z-index: 1;
+            flex: 1 1 0;
+            max-width: 280px;
+            padding: 0 10px;
         }
 
+        /* ── Step Icon Circle ── */
         .step-icon {
-            width: 80px;
-            height: 80px;
+            width: 88px;
+            height: 88px;
             border-radius: 50%;
-            border: 1.5px solid rgba(0, 0, 0, 0.10);
-            background: rgba(255, 255, 255, 0.40);
+            border: 1.5px solid rgba(138, 31, 45, 0.20);
+            background: rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(2px);
             -webkit-backdrop-filter: blur(2px);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
+            margin-bottom: 18px;
+            transition: border-color 0.4s ease,
+                background 0.4s ease,
+                transform 0.4s ease,
+                box-shadow 0.4s ease;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
             flex-shrink: 0;
         }
 
         .step:hover .step-icon {
             border-color: var(--crimson);
-            background: rgba(255, 255, 255, 0.60);
+            background: rgba(255, 255, 255, 0.75);
             transform: scale(1.04);
             box-shadow: 0 8px 28px rgba(138, 31, 45, 0.10);
         }
 
         .step-icon svg {
-            width: 34px;
-            height: 34px;
+            width: 38px;
+            height: 38px;
             stroke: var(--espresso);
             fill: none;
-            stroke-width: 1.7;
+            stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
             transition: stroke 0.4s ease, transform 0.4s ease;
@@ -1426,38 +1428,145 @@
 
         .step:hover .step-icon svg {
             stroke: var(--crimson);
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
 
-        .step-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 15px;
-            font-weight: 400;
-            color: var(--blush);
-            letter-spacing: 0.06em;
-            margin-bottom: 4px;
-        }
-
+        /* ── Step Title ── */
         .step h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(22px, 2vw, 28px);
-            font-weight: 400;
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             color: var(--espresso);
-            margin-bottom: 10px;
-            letter-spacing: -0.01em;
+            margin-bottom: 8px;
         }
 
+        /* ── Step Description ── */
         .step p {
             font-size: 16px;
-            line-height: 1.8;
+            line-height: 1.7;
             color: var(--charcoal);
             font-weight: 300;
-            max-width: 320px;
+            max-width: 300px;
             margin: 0 auto;
         }
 
+        /* ── Step Arrows ── */
+        .step-arrow {
+            flex: 0 0 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--charcoal);
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .step-arrow svg {
+            width: 32px;
+            height: 32px;
+            stroke-width: 2;
+            stroke: currentColor;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .steps-grid:hover .step-arrow {
+            opacity: 0.6;
+        }
+
+        /* ── Shop Now Button ── */
+        .how-it-works-cta {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .how-it-works-cta .btn-shop {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 52px;
+            font-family: 'Jost', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all .35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            outline: none;
+            background: linear-gradient(135deg, var(--espresso) 0%, var(--espresso-light) 60%, #3A352F 100%);
+            color: var(--ivory);
+            border: none;
+            box-shadow: 0 4px 20px rgba(28, 26, 24, 0.22),
+                0 1px 4px rgba(28, 26, 24, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .how-it-works-cta .btn-shop::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -80%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(100deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.10) 40%,
+                    rgba(255, 255, 255, 0.16) 50%,
+                    rgba(255, 255, 255, 0.10) 60%,
+                    transparent 100%);
+            transform: skewX(-20deg);
+            transition: left .7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .how-it-works-cta .btn-shop:hover {
+            background: linear-gradient(135deg, var(--crimson-dark) 0%, var(--crimson) 50%, var(--crimson-light) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(138, 31, 45, 0.35),
+                0 4px 12px rgba(138, 31, 45, 0.22),
+                0 1px 4px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .how-it-works-cta .btn-shop:hover::before {
+            left: 120%;
+        }
+
+        .how-it-works-cta .btn-shop:active {
+            transform: translateY(-1px) scale(0.98);
+            box-shadow: 0 4px 12px rgba(138, 31, 45, 0.25),
+                0 1px 3px rgba(0, 0, 0, 0.15);
+            transition-duration: .1s;
+        }
+
+        .how-it-works-cta .btn-shop .btn-label {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .how-it-works-cta .btn-shop:focus-visible {
+            outline: 3px solid var(--crimson);
+            outline-offset: 3px;
+            box-shadow: 0 0 0 6px rgba(138, 31, 45, 0.15),
+                0 8px 24px rgba(28, 26, 24, 0.25);
+        }
+
         /* ═══════════════════════════════════════════════════════════════
-           SECTION 8 — GO TO TOP BUTTON (subtle, right side)
+           SECTION 8 — GO TO TOP BUTTON
            ═══════════════════════════════════════════════════════════════ */
         .go-top {
             position: fixed;
@@ -1819,21 +1928,30 @@
             .how-it-works .container {
                 padding: 0 48px;
             }
-            .steps-grid {
-                gap: 30px;
+            .step {
+                max-width: 220px;
             }
-            .steps-grid::before {
-                top: 48px;
-                left: 12%;
-                right: 12%;
+            .step-arrow {
+                flex: 0 0 30px;
+            }
+            .step-arrow svg {
+                width: 24px;
+                height: 24px;
             }
             .step-icon {
-                width: 72px;
-                height: 72px;
+                width: 78px;
+                height: 78px;
             }
             .step-icon svg {
-                width: 30px;
-                height: 30px;
+                width: 34px;
+                height: 34px;
+            }
+            .step h3 {
+                font-size: 17px;
+            }
+            .step p {
+                font-size: 15px;
+                max-width: 260px;
             }
 
             .site-footer {
@@ -2329,52 +2447,67 @@
 
             /* ── HOW IT WORKS MOBILE ── */
             .how-it-works {
-                padding: 60px 0 80px;
+                padding: 56px 0 72px;
             }
             .how-it-works .container {
                 padding: 0 32px;
             }
             .how-it-works-header {
-                margin-bottom: 44px;
+                margin-bottom: 40px;
             }
+            /* Keep heading style consistent */
             .how-it-works-header h2 {
                 font-size: clamp(30px, 5.5vw, 38px);
+                letter-spacing: -0.01em;
+                margin-top: 8px;
             }
 
             .how-it-works::before {
                 background-image: url('how-it-works-bg-mobile.webp');
-                opacity: 0.30;
+                opacity: 0.25;
             }
 
+            /* Hide arrows on mobile */
             .steps-grid {
-                grid-template-columns: 1fr;
-                gap: 48px;
+                flex-direction: column;
+                gap: 40px;
             }
-            .steps-grid::before {
+            .step-arrow {
                 display: none;
             }
-
             .step {
-                max-width: 400px;
-                margin: 0 auto;
+                max-width: 100%;
+                width: 100%;
+                padding: 0;
             }
             .step-icon {
-                width: 76px;
-                height: 76px;
-                margin-bottom: 16px;
-                background: rgba(255, 255, 255, 0.35);
+                width: 78px;
+                height: 78px;
+                margin-bottom: 14px;
+                background: rgba(255, 255, 255, 0.40);
             }
             .step-icon svg {
-                width: 32px;
-                height: 32px;
+                width: 34px;
+                height: 34px;
             }
             .step h3 {
-                font-size: 24px;
+                font-size: 17px;
+                letter-spacing: 0.08em;
             }
             .step p {
                 font-size: 15px;
                 max-width: 100%;
-                line-height: 1.8;
+                line-height: 1.7;
+            }
+
+            .how-it-works-cta .btn-shop {
+                padding: 14px 40px;
+                font-size: 12px;
+                letter-spacing: .14em;
+                min-width: 180px;
+            }
+            .how-it-works-cta .btn-shop .btn-label {
+                gap: 8px;
             }
 
             /* ── FOOTER MOBILE ── */
@@ -2695,28 +2828,38 @@
             }
 
             .how-it-works {
-                padding: 48px 0 64px;
+                padding: 44px 0 60px;
             }
             .how-it-works .container {
                 padding: 0 16px;
             }
             .how-it-works-header h2 {
                 font-size: clamp(26px, 6vw, 32px);
+                letter-spacing: -0.01em;
+                margin-top: 8px;
             }
             .step-icon {
-                width: 68px;
-                height: 68px;
-                background: rgba(255, 255, 255, 0.30);
+                width: 70px;
+                height: 70px;
+                background: rgba(255, 255, 255, 0.35);
             }
             .step-icon svg {
-                width: 28px;
-                height: 28px;
+                width: 30px;
+                height: 30px;
             }
             .step h3 {
-                font-size: 22px;
+                font-size: 16px;
+                letter-spacing: 0.06em;
             }
             .step p {
                 font-size: 14px;
+            }
+
+            .how-it-works-cta .btn-shop {
+                padding: 12px 32px;
+                font-size: 11px;
+                letter-spacing: .12em;
+                min-width: 150px;
             }
 
             .site-footer {
@@ -2874,19 +3017,25 @@
                 padding: 0 12px;
             }
             .step-icon {
-                width: 60px;
-                height: 60px;
-                background: rgba(255, 255, 255, 0.25);
+                width: 62px;
+                height: 62px;
+                background: rgba(255, 255, 255, 0.30);
             }
             .step-icon svg {
-                width: 24px;
-                height: 24px;
+                width: 26px;
+                height: 26px;
             }
             .step h3 {
-                font-size: 20px;
+                font-size: 15px;
             }
             .step p {
                 font-size: 13px;
+            }
+            .how-it-works-cta .btn-shop {
+                padding: 10px 24px;
+                font-size: 10px;
+                letter-spacing: .10em;
+                min-width: 120px;
             }
 
             .site-footer {
@@ -3306,7 +3455,7 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-    HTML — HOW IT WORKS
+    HTML — HOW IT WORKS (UPDATED WITH CORRECT FONT & NEW ICON)
     ═══════════════════════════════════════════════════════════════ -->
     <section class="how-it-works" id="howItWorksSection">
         <div class="container">
@@ -3318,63 +3467,73 @@
 
             <div class="steps-grid">
 
-                <!-- Step 1 — First Suit -->
+                <!-- Step 1 — First suit -->
                 <div class="step">
                     <div class="step-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 2v4" stroke="currentColor" fill="none" />
-                            <path d="M6 6h12" stroke="currentColor" fill="none" />
-                            <path d="M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6" stroke="currentColor" fill="none" />
-                            <path d="M10 10h4" stroke="currentColor" fill="none" />
-                            <path d="M10 14h4" stroke="currentColor" fill="none" />
-                            <path d="M10 18h2" stroke="currentColor" fill="none" />
+                        <!-- Lucide Shopping Bag Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 10a4 4 0 0 1-8 0"/>
+                            <path d="M3.103 6.034h17.794"/>
+                            <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/>
                         </svg>
                     </div>
-                    <span class="step-number">01</span>
-                    <h3>First Suit</h3>
+                    <h3>First suit</h3>
                     <p>We make your first suit in a standard size.</p>
+                </div>
+
+                <!-- Arrow 1 -->
+                <div class="step-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
                 </div>
 
                 <!-- Step 2 — Give Feedback -->
                 <div class="step">
                     <div class="step-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" fill="none" />
-                            <circle cx="8" cy="10" r="1.5" fill="currentColor" stroke="none" />
-                            <circle cx="12" cy="10" r="1.5" fill="currentColor" stroke="none" />
-                            <circle cx="16" cy="10" r="1.5" fill="currentColor" stroke="none" />
+                        <!-- Lucide Message Square Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/>
                         </svg>
                     </div>
-                    <span class="step-number">02</span>
                     <h3>Give Feedback</h3>
                     <p>Let us know what you want to adjust.</p>
                 </div>
 
-                <!-- Step 3 — Custom Size -->
+                <!-- Arrow 2 -->
+                <div class="step-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+
+                <!-- Step 3 — Custom Size (UPDATED ICON) -->
                 <div class="step">
                     <div class="step-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" fill="none" />
-                            <line x1="8" y1="6" x2="16" y2="6" stroke="currentColor" fill="none" />
-                            <line x1="8" y1="10" x2="16" y2="10" stroke="currentColor" fill="none" />
-                            <line x1="8" y1="14" x2="16" y2="14" stroke="currentColor" fill="none" />
-                            <line x1="10" y1="18" x2="14" y2="18" stroke="currentColor" fill="none" stroke-width="2.5" />
-                            <path d="M12 2v4" stroke="currentColor" fill="none" />
-                            <path d="M12 20v2" stroke="currentColor" fill="none" />
-                            <path d="M12 16l2 2 4-4" stroke="currentColor" fill="none" stroke-width="2" />
+                        <!-- Lucide User Round Pen Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 21a8 8 0 0 1 10.821-7.487"/>
+                            <path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/>
+                            <circle cx="10" cy="8" r="5"/>
                         </svg>
                     </div>
-                    <span class="step-number">03</span>
                     <h3>Custom Size</h3>
                     <p>We adjust your measurement profile so your next suit fits even better!</p>
                 </div>
 
             </div>
+
+            <!-- Shop Now Button -->
+            <div class="how-it-works-cta">
+                <a href="#" class="btn-shop">
+                    <span class="btn-label">Shop now</span>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-    HTML — GO TO TOP BUTTON (subtle, right side)
+    HTML — GO TO TOP BUTTON
     ═══════════════════════════════════════════════════════════════ -->
     <button class="go-top" id="goTopBtn" aria-label="Go to top">
         <svg viewBox="0 0 24 24">
