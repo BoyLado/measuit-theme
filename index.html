@@ -1541,6 +1541,19 @@
             }
         }
 
+        /* ── Mobile scrolling experience ── */
+        @media (max-width: 768px) {
+            html {
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior-y: auto;
+            }
+
+            body {
+                touch-action: pan-y;
+            }
+        }
+
         /* ── Mobile (≤ 768px) ── */
         @media (max-width: 768px) {
             .hero-bg {
@@ -2493,7 +2506,22 @@
                 font-size: 11px;
             }
         }
-    </style>
+    
+        /* Mobile-only: more responsive native scrolling */
+        @media (max-width: 768px) {
+            html {
+                scroll-behavior: auto;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior-y: auto;
+            }
+
+            body {
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior-y: auto;
+                touch-action: pan-y;
+            }
+        }
+</style>
 </head>
 
 <body>
@@ -3226,11 +3254,20 @@
                 updateScroll();
             }, { passive: false });
 
+            /* Mobile uses the browser's native touch scrolling. This preserves
+               natural momentum/inertia and avoids fighting the browser's gesture
+               physics. The existing custom scroll behavior remains unchanged
+               for desktop. */
             var touchStartY = 0;
             var touchCurrentY = 0;
             var isTouching = false;
 
+            function isMobileScroll() {
+                return window.matchMedia('(max-width: 768px)').matches;
+            }
+
             window.addEventListener('touchstart', function(e) {
+                if (isMobileScroll()) return;
                 if (e.target.closest('.nav-links') || e.target.closest('.hamburger')) return;
                 touchStartY = e.touches[0].clientY;
                 touchCurrentY = touchStartY;
@@ -3238,6 +3275,7 @@
             }, { passive: true });
 
             window.addEventListener('touchmove', function(e) {
+                if (isMobileScroll()) return;
                 if (!isTouching) return;
                 if (e.target.closest('.nav-links') || e.target.closest('.hamburger')) return;
                 e.preventDefault();
@@ -3249,6 +3287,7 @@
             }, { passive: false });
 
             window.addEventListener('touchend', function() {
+                if (isMobileScroll()) return;
                 isTouching = false;
             }, { passive: true });
 
