@@ -8,9 +8,11 @@
     <!-- ─── PRELOAD ASSETS ─── -->
     <link rel="preload" as="image" href="banner-bg-desktop.webp" type="image/webp" />
     <link rel="preload" as="image" href="bg-m.png" type="image/webp" />
+    <link rel="preload" as="image" href="how-it-works-bg.webp" type="image/webp" />
+    <link rel="preload" as="image" href="how-it-works-bg-mobile.webp" type="image/webp" />
 
     <!-- ─── GOOGLE FONTS ─── -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
     <style>
         /* ═══════════════════════════════════════════════════════════════
@@ -46,6 +48,12 @@
             color: var(--ink);
             margin: 0;
             padding: 0;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         /* ═══════════════════════════════════════════════════════════════
@@ -98,8 +106,8 @@
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             color: #fff;
-            font-size: 11px;
-            letter-spacing: .08em;
+            font-size: 12px;
+            letter-spacing: 0.1em;
             display: flex;
             justify-content: center;
             gap: 48px;
@@ -144,6 +152,7 @@
         /* ── Navbar ── */
         nav {
             display: flex;
+            flex-wrap: nowrap; /* prevent wrapping on desktop */
             align-items: center;
             padding: 0 120px;
             height: 70px;
@@ -160,9 +169,9 @@
             justify-content: center;
             position: relative;
             z-index: 2;
+            flex-shrink: 0;
         }
 
-        /* ── LOGO — desktop size (unchanged) ── */
         .logo img {
             max-height: 44px;
             width: auto;
@@ -175,6 +184,7 @@
         .nav-links {
             flex: 1;
             display: flex;
+            flex-wrap: nowrap; /* prevent wrapping on desktop */
             gap: 36px;
             list-style: none;
             justify-content: flex-start;
@@ -182,14 +192,15 @@
             z-index: 2;
         }
         .nav-links a {
-            font-size: 12px;
-            letter-spacing: .14em;
+            font-size: 13px;
+            letter-spacing: 0.15em;
             color: var(--ink);
             text-decoration: none;
             text-transform: uppercase;
-            font-weight: 400;
+            font-weight: 500;
             position: relative;
             padding-bottom: 4px;
+            white-space: nowrap; /* keep text on one line */
             transition: color .25s ease, transform .15s ease;
         }
         .nav-links a::after {
@@ -221,6 +232,7 @@
             justify-content: flex-end;
             position: relative;
             z-index: 2;
+            flex-shrink: 0;
         }
         .nav-icons svg {
             width: 19px;
@@ -330,7 +342,6 @@
             animation: heroBgZoom 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
-        /* ── Desktop overlay ── */
         .hero-bg::after {
             content: '';
             position: absolute;
@@ -409,7 +420,7 @@
         }
         .eyebrow-text {
             font-size: 12px;
-            letter-spacing: .2em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--burgundy);
             font-weight: 500;
@@ -418,22 +429,23 @@
 
         .hero-headline {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(42px, 5.2vw, 60px);
+            font-size: clamp(44px, 5.5vw, 64px);
             font-weight: 300;
             line-height: 1.05;
             color: var(--espresso);
             margin-bottom: 16px;
-            letter-spacing: -.01em;
+            letter-spacing: -0.01em;
             text-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
         }
         .hero-headline em {
             font-style: italic;
             color: var(--crimson);
+            font-weight: 400;
         }
 
         .hero-features {
-            font-size: 13px;
-            letter-spacing: .12em;
+            font-size: 14px;
+            letter-spacing: 0.12em;
             color: var(--charcoal);
             margin-bottom: 32px;
             font-weight: 400;
@@ -483,9 +495,9 @@
             gap: 10px;
             padding: 16px 42px;
             font-family: 'Jost', sans-serif;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
-            letter-spacing: .16em;
+            letter-spacing: 0.16em;
             text-transform: uppercase;
             text-decoration: none;
             cursor: pointer;
@@ -567,9 +579,9 @@
             gap: 10px;
             padding: 16px 32px;
             font-family: 'Jost', sans-serif;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 400;
-            letter-spacing: .16em;
+            letter-spacing: 0.16em;
             text-transform: uppercase;
             text-decoration: none;
             cursor: pointer;
@@ -656,15 +668,16 @@
         .story-header h2 {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 300;
-            font-size: clamp(32px, 4vw, 48px);
+            font-size: clamp(34px, 4.2vw, 50px);
             color: var(--espresso);
-            letter-spacing: -.01em;
+            letter-spacing: -0.01em;
             margin-top: 8px;
         }
 
         .story-header h2 em {
             font-style: italic;
             color: var(--crimson);
+            font-weight: 400;
         }
 
         .story-block {
@@ -712,7 +725,7 @@
             right: 20px;
             background: rgba(255, 255, 255, 0.85);
             color: var(--espresso);
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 500;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -784,7 +797,7 @@
 
         .story-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 300;
             color: var(--blush);
             line-height: 1;
@@ -794,11 +807,11 @@
 
         .story-content h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(28px, 3vw, 36px);
+            font-size: clamp(30px, 3.2vw, 38px);
             font-weight: 400;
             color: var(--espresso);
             margin-bottom: 16px;
-            letter-spacing: -.01em;
+            letter-spacing: -0.01em;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
@@ -820,8 +833,8 @@
         }
 
         .story-content p {
-            font-size: 16px;
-            line-height: 1.8;
+            font-size: 17px;
+            line-height: 1.9;
             color: var(--charcoal);
             font-weight: 300;
             max-width: 480px;
@@ -834,13 +847,14 @@
         }
 
         .story-content .feature-list li {
-            font-size: 15px;
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.7;
             color: var(--espresso);
             padding: 4px 0;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 400;
         }
 
         .story-content .feature-list li::before {
@@ -885,13 +899,14 @@
         .testimonials-header h2 {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 300;
-            font-size: clamp(26px, 3vw, 36px);
+            font-size: clamp(28px, 3.2vw, 38px);
             color: var(--espresso);
-            letter-spacing: -.01em;
+            letter-spacing: -0.01em;
         }
         .testimonials-header h2 em {
             font-style: italic;
             color: var(--crimson);
+            font-weight: 400;
         }
 
         /* ── Carousel ── */
@@ -974,8 +989,8 @@
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             font-weight: 300;
-            font-size: clamp(15px, 1.4vw, 18px);
-            line-height: 1.55;
+            font-size: clamp(16px, 1.5vw, 19px);
+            line-height: 1.6;
             color: var(--espresso);
             margin-bottom: 12px;
             flex: 1;
@@ -1001,9 +1016,9 @@
         }
 
         .testimonial-name {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
-            letter-spacing: .12em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--charcoal);
             margin-top: auto;
@@ -1011,7 +1026,7 @@
         .testimonial-name .verified {
             display: inline-block;
             font-weight: 400;
-            letter-spacing: .08em;
+            letter-spacing: 0.08em;
             color: var(--mauve);
             font-size: 10px;
             text-transform: none;
@@ -1088,7 +1103,7 @@
 
         .testimonial-counter {
             font-size: 13px;
-            letter-spacing: .08em;
+            letter-spacing: 0.08em;
             color: var(--charcoal);
             min-width: 36px;
             text-align: center;
@@ -1185,19 +1200,19 @@
         }
 
         .our-story .section-eyebrow .label {
-            font-size: 11px;
-            letter-spacing: .25em;
+            font-size: 12px;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             color: var(--charcoal);
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .our-story h2 {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 300;
-            font-size: clamp(34px, 4.2vw, 52px);
+            font-size: clamp(36px, 4.5vw, 54px);
             color: var(--espresso);
-            letter-spacing: -.01em;
+            letter-spacing: -0.01em;
             margin-bottom: 28px;
             line-height: 1.08;
         }
@@ -1205,11 +1220,12 @@
         .our-story h2 em {
             font-style: italic;
             color: var(--crimson);
+            font-weight: 400;
         }
 
         .our-story .story-body {
-            font-size: 16px;
-            line-height: 1.9;
+            font-size: 17px;
+            line-height: 2;
             color: var(--charcoal);
             font-weight: 300;
         }
@@ -1224,7 +1240,7 @@
 
         .our-story .story-body .highlight {
             color: var(--espresso);
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .our-story .story-body .emphasis {
@@ -1232,6 +1248,7 @@
             font-style: italic;
             font-size: 1.15em;
             color: var(--crimson);
+            font-weight: 400;
         }
 
         .our-story .story-divider {
@@ -1258,11 +1275,11 @@
 
         .our-story .story-mission {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(18px, 1.6vw, 22px);
+            font-size: clamp(19px, 1.8vw, 24px);
             font-weight: 300;
             font-style: italic;
             color: var(--espresso);
-            line-height: 1.6;
+            line-height: 1.7;
             margin-top: 12px;
             padding: 20px 0 0;
             border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -1275,7 +1292,172 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           SECTION 7 — FOOTER (Desktop layout)
+           SECTION 7 — HOW IT WORKS
+           ═══════════════════════════════════════════════════════════════ */
+        .how-it-works {
+            position: relative;
+            padding: 90px 0 120px;
+            background: var(--ivory);
+            overflow: hidden;
+        }
+
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('how-it-works-bg.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.35;
+            z-index: 0;
+        }
+
+        .how-it-works::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.08);
+            z-index: 0;
+        }
+
+        .how-it-works .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 120px;
+        }
+
+        .how-it-works-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .how-it-works-header .eyebrow-line {
+            display: inline-block;
+            width: 40px;
+            height: 1.5px;
+            background: var(--crimson);
+            opacity: .6;
+            margin-bottom: 10px;
+        }
+
+        .how-it-works-header .eyebrow-text {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .how-it-works-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: clamp(34px, 4.2vw, 50px);
+            color: var(--espresso);
+            letter-spacing: -0.01em;
+            margin-top: 4px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 52px;
+            left: 16.66%;
+            right: 16.66%;
+            height: 1.5px;
+            background: rgba(0, 0, 0, 0.08);
+            z-index: 0;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(0, 0, 0, 0.10);
+            background: rgba(255, 255, 255, 0.40);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            flex-shrink: 0;
+        }
+
+        .step:hover .step-icon {
+            border-color: var(--crimson);
+            background: rgba(255, 255, 255, 0.60);
+            transform: scale(1.04);
+            box-shadow: 0 8px 28px rgba(138, 31, 45, 0.10);
+        }
+
+        .step-icon svg {
+            width: 34px;
+            height: 34px;
+            stroke: var(--espresso);
+            fill: none;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.4s ease, transform 0.4s ease;
+        }
+
+        .step:hover .step-icon svg {
+            stroke: var(--crimson);
+            transform: scale(1.05);
+        }
+
+        .step-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--blush);
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+        }
+
+        .step h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(22px, 2vw, 28px);
+            font-weight: 400;
+            color: var(--espresso);
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .step p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--charcoal);
+            font-weight: 300;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION 8 — FOOTER
            ═══════════════════════════════════════════════════════════════ */
         .site-footer {
             background: var(--espresso);
@@ -1283,6 +1465,7 @@
             padding: 64px 120px 40px;
             font-family: 'Jost', sans-serif;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-weight: 300;
         }
 
         .footer-inner {
@@ -1307,9 +1490,9 @@
         }
 
         .footer-brand .tagline {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 300;
-            line-height: 1.6;
+            line-height: 1.7;
             color: rgba(255, 255, 255, 0.65);
             max-width: 280px;
             margin-bottom: 18px;
@@ -1350,7 +1533,7 @@
         }
 
         .footer-col h4 {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 500;
             letter-spacing: 0.16em;
             text-transform: uppercase;
@@ -1371,7 +1554,7 @@
         }
 
         .footer-col ul li a {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 300;
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
@@ -1386,10 +1569,10 @@
         }
 
         .footer-newsletter p {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 300;
             color: rgba(255, 255, 255, 0.65);
-            line-height: 1.6;
+            line-height: 1.7;
             margin-bottom: 16px;
             letter-spacing: 0.02em;
         }
@@ -1409,7 +1592,7 @@
             background: rgba(255, 255, 255, 0.05);
             color: #fff;
             font-family: 'Jost', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 300;
             outline: none;
             transition: border-color 0.3s ease, background 0.3s ease;
@@ -1433,7 +1616,7 @@
             background: var(--crimson);
             color: #fff;
             font-family: 'Jost', sans-serif;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 500;
             letter-spacing: 0.12em;
             text-transform: uppercase;
@@ -1461,7 +1644,7 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 16px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 300;
             color: rgba(255, 255, 255, 0.4);
             letter-spacing: 0.04em;
@@ -1477,7 +1660,7 @@
             color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             transition: color 0.25s ease;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 300;
             letter-spacing: 0.04em;
         }
@@ -1487,7 +1670,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           SECTION 8 — RESPONSIVE
+           SECTION 9 — RESPONSIVE
            ═══════════════════════════════════════════════════════════════ */
 
         /* ── Tablet (≤ 1024px) ── */
@@ -1503,7 +1686,6 @@
                 gap: 24px;
             }
 
-            /* ── Logo tablet ── */
             .logo img {
                 max-height: 44px;
             }
@@ -1534,6 +1716,26 @@
                 gap: 50px;
             }
 
+            .how-it-works .container {
+                padding: 0 48px;
+            }
+            .steps-grid {
+                gap: 30px;
+            }
+            .steps-grid::before {
+                top: 48px;
+                left: 12%;
+                right: 12%;
+            }
+            .step-icon {
+                width: 72px;
+                height: 72px;
+            }
+            .step-icon svg {
+                width: 30px;
+                height: 30px;
+            }
+
             .site-footer {
                 padding: 48px 48px 32px;
             }
@@ -1556,6 +1758,8 @@
 
             body {
                 touch-action: pan-y;
+                font-size: 16px;
+                line-height: 1.7;
             }
         }
 
@@ -1592,13 +1796,13 @@
             }
 
             .hero-headline {
-                font-size: clamp(32px, 6vw, 42px);
+                font-size: clamp(34px, 6.5vw, 44px);
                 text-align: center;
                 text-shadow: 0 2px 12px rgba(255, 255, 255, 0.6);
             }
 
             .hero-features {
-                font-size: 11px;
+                font-size: 12px;
                 flex-direction: row;
                 flex-wrap: nowrap;
                 justify-content: center;
@@ -1627,6 +1831,7 @@
                 padding: 0 16px;
                 height: 64px;
                 gap: 0;
+                flex-wrap: nowrap; /* keep consistent */
             }
 
             .hamburger {
@@ -1659,7 +1864,6 @@
                 justify-self: center;
             }
 
-            /* ── Logo mobile — larger ── */
             .logo img {
                 max-height: 42px;
                 width: auto;
@@ -1714,6 +1918,7 @@
                 opacity: 0;
                 overflow-y: auto;
                 will-change: transform;
+                flex-wrap: nowrap; /* not needed for column */
             }
 
             .nav-links .close-btn-li {
@@ -1786,14 +1991,15 @@
                 display: block;
                 padding: 18px 12px;
                 font-size: 18px;
-                letter-spacing: .16em;
+                letter-spacing: 0.16em;
                 text-transform: uppercase;
                 color: var(--ink);
                 text-decoration: none;
-                font-weight: 400;
+                font-weight: 500;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.05);
                 transition: color .25s, background .25s, padding-left .25s;
                 border-radius: 4px;
+                white-space: normal; /* allow wrap on mobile if needed, but keep one line */
             }
             .nav-links a:hover,
             .nav-links a:focus {
@@ -1827,12 +2033,12 @@
             }
 
             .hero-headline {
-                font-size: clamp(32px, 6vw, 42px);
+                font-size: clamp(34px, 6.5vw, 44px);
             }
 
             .hero-cta-primary {
                 padding: 14px 28px;
-                font-size: 11px;
+                font-size: 12px;
                 letter-spacing: .12em;
                 min-width: 150px;
                 flex: 0 0 auto;
@@ -1842,7 +2048,7 @@
 
             .hero-cta-secondary {
                 padding: 14px 22px;
-                font-size: 11px;
+                font-size: 12px;
                 letter-spacing: .12em;
                 min-width: 120px;
                 flex: 0 0 auto;
@@ -1870,7 +2076,6 @@
                 gap: 36px;
                 align-items: center;
             }
-            /* ── MODIFICATION: full height image on mobile ── */
             .our-story-image {
                 width: 100%;
                 height: 100vh;
@@ -1884,13 +2089,13 @@
                 object-fit: cover;
             }
             .our-story h2 {
-                font-size: clamp(28px, 5vw, 36px);
+                font-size: clamp(30px, 5.5vw, 38px);
             }
             .our-story .story-body {
-                font-size: 15px;
+                font-size: 16px;
+                line-height: 1.9;
             }
 
-            /* ── CENTER CONTENT ON MOBILE ── */
             .our-story-text {
                 text-align: center;
                 display: flex;
@@ -1931,6 +2136,13 @@
             }
             .story-content p {
                 max-width: 100%;
+                font-size: 16px;
+            }
+            .story-content h3 {
+                font-size: clamp(26px, 5vw, 32px);
+            }
+            .story-number {
+                font-size: 44px;
             }
 
             .testimonials {
@@ -1943,7 +2155,7 @@
                 margin-bottom: 32px;
             }
             .testimonials-header h2 {
-                font-size: clamp(22px, 4.5vw, 28px);
+                font-size: clamp(24px, 5vw, 30px);
             }
 
             .testimonial-card {
@@ -1964,10 +2176,10 @@
                 margin-bottom: 8px;
             }
             .testimonial-quote {
-                font-size: clamp(14px, 3.2vw, 16px);
+                font-size: clamp(15px, 3.5vw, 17px);
             }
             .testimonial-name {
-                font-size: 10px;
+                font-size: 11px;
                 letter-spacing: .10em;
             }
             .testimonial-name .verified {
@@ -1996,7 +2208,57 @@
                 min-width: 30px;
             }
 
-            /* ── FOOTER MOBILE: 2-column for Navigate & Support ── */
+            /* ── HOW IT WORKS MOBILE ── */
+            .how-it-works {
+                padding: 60px 0 80px;
+            }
+            .how-it-works .container {
+                padding: 0 32px;
+            }
+            .how-it-works-header {
+                margin-bottom: 44px;
+            }
+            .how-it-works-header h2 {
+                font-size: clamp(30px, 5.5vw, 38px);
+            }
+
+            .how-it-works::before {
+                background-image: url('how-it-works-bg-mobile.webp');
+                opacity: 0.30;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            .steps-grid::before {
+                display: none;
+            }
+
+            .step {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .step-icon {
+                width: 76px;
+                height: 76px;
+                margin-bottom: 16px;
+                background: rgba(255, 255, 255, 0.35);
+            }
+            .step-icon svg {
+                width: 32px;
+                height: 32px;
+            }
+            .step h3 {
+                font-size: 24px;
+            }
+            .step p {
+                font-size: 15px;
+                max-width: 100%;
+                line-height: 1.8;
+            }
+
+            /* ── FOOTER MOBILE ── */
             .site-footer {
                 padding: 40px 20px 28px;
             }
@@ -2020,7 +2282,6 @@
                 display: flex;
                 justify-content: center;
             }
-            /* ── Footer logo matches navbar on mobile ── */
             .footer-brand .footer-logo img {
                 max-height: 42px;
             }
@@ -2028,6 +2289,7 @@
                 max-width: 100%;
                 margin-left: auto;
                 margin-right: auto;
+                font-size: 14px;
             }
             .footer-social {
                 justify-content: center;
@@ -2043,7 +2305,6 @@
                 height: 20px;
             }
 
-            /* Navigate and Support columns */
             .footer-col:first-of-type {
                 grid-area: nav;
                 text-align: center;
@@ -2071,7 +2332,7 @@
                 text-align: center;
             }
             .footer-newsletter p {
-                font-size: 15px;
+                font-size: 14px;
                 max-width: 400px;
             }
             .footer-newsletter form {
@@ -2082,14 +2343,12 @@
                 margin-left: auto;
                 margin-right: auto;
             }
-            /* ── Email textbox: center text ── */
             .footer-newsletter input[type="email"] {
                 min-width: 100%;
                 padding: 14px 16px;
                 font-size: 15px;
                 text-align: center;
             }
-            /* ── Sign Up button: same thickness as textbox ── */
             .footer-newsletter button {
                 width: 100%;
                 padding: 14px 16px;
@@ -2140,7 +2399,6 @@
                 transform: translateY(-5.5px) rotate(-45deg);
             }
 
-            /* ── Logo small mobile ── */
             .logo img {
                 max-height: 38px;
             }
@@ -2181,7 +2439,7 @@
                 transform: translateY(calc(-25% - 40px));
             }
             .hero-headline {
-                font-size: clamp(28px, 7vw, 36px);
+                font-size: clamp(30px, 7.5vw, 38px);
                 text-shadow: 0 2px 16px rgba(255, 255, 255, 0.7);
             }
 
@@ -2198,7 +2456,7 @@
             }
             .hero-cta-primary {
                 padding: 14px 18px;
-                font-size: 10px;
+                font-size: 11px;
                 letter-spacing: .10em;
                 width: auto;
                 justify-content: center;
@@ -2208,7 +2466,7 @@
             }
             .hero-cta-secondary {
                 padding: 14px 16px;
-                font-size: 10px;
+                font-size: 11px;
                 letter-spacing: .10em;
                 width: auto;
                 justify-content: center;
@@ -2234,11 +2492,11 @@
                 gap: 28px;
             }
             .our-story h2 {
-                font-size: clamp(24px, 5.5vw, 30px);
+                font-size: clamp(26px, 6vw, 32px);
             }
             .our-story .story-body {
-                font-size: 14px;
-                line-height: 1.8;
+                font-size: 15px;
+                line-height: 1.9;
             }
             .our-story .story-mission {
                 font-size: 17px;
@@ -2248,13 +2506,13 @@
                 padding: 0 16px;
             }
             .story-number {
-                font-size: 36px;
+                font-size: 38px;
             }
             .story-content h3 {
                 font-size: 24px;
             }
             .story-content p {
-                font-size: 14px;
+                font-size: 15px;
             }
 
             .topbar {
@@ -2286,10 +2544,10 @@
                 gap: 1px;
             }
             .testimonial-quote {
-                font-size: clamp(13px, 3.5vw, 14px);
+                font-size: clamp(14px, 3.8vw, 15px);
             }
             .testimonial-name {
-                font-size: 9px;
+                font-size: 10px;
             }
             .testimonial-name .verified {
                 font-size: 8px;
@@ -2317,7 +2575,31 @@
                 min-width: 26px;
             }
 
-            /* ── Footer small mobile ── */
+            .how-it-works {
+                padding: 48px 0 64px;
+            }
+            .how-it-works .container {
+                padding: 0 16px;
+            }
+            .how-it-works-header h2 {
+                font-size: clamp(26px, 6vw, 32px);
+            }
+            .step-icon {
+                width: 68px;
+                height: 68px;
+                background: rgba(255, 255, 255, 0.30);
+            }
+            .step-icon svg {
+                width: 28px;
+                height: 28px;
+            }
+            .step h3 {
+                font-size: 22px;
+            }
+            .step p {
+                font-size: 14px;
+            }
+
             .site-footer {
                 padding: 32px 16px 20px;
             }
@@ -2328,7 +2610,6 @@
                 display: flex;
                 justify-content: center;
             }
-            /* ── Footer logo matches navbar on small mobile ── */
             .footer-brand .footer-logo img {
                 max-height: 38px;
             }
@@ -2394,7 +2675,6 @@
                 transform: translateY(-4.5px) rotate(-45deg);
             }
 
-            /* ── Logo extra small ── */
             .logo img {
                 max-height: 32px;
             }
@@ -2426,6 +2706,9 @@
                 max-width: 94%;
                 transform: translateY(calc(-20% - 40px));
             }
+            .hero-headline {
+                font-size: clamp(26px, 7vw, 32px);
+            }
 
             .hero-features {
                 font-size: 9px;
@@ -2436,7 +2719,7 @@
             .hero-cta-primary,
             .hero-cta-secondary {
                 padding: 12px 14px;
-                font-size: 9px;
+                font-size: 10px;
                 letter-spacing: .08em;
                 min-width: unset;
                 flex: 1 1 auto;
@@ -2468,7 +2751,25 @@
                 height: 48px;
             }
 
-            /* ── Footer extra small: switch to 1 column ── */
+            .how-it-works .container {
+                padding: 0 12px;
+            }
+            .step-icon {
+                width: 60px;
+                height: 60px;
+                background: rgba(255, 255, 255, 0.25);
+            }
+            .step-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            .step h3 {
+                font-size: 20px;
+            }
+            .step p {
+                font-size: 13px;
+            }
+
             .site-footer {
                 padding: 24px 12px 16px;
             }
@@ -2489,7 +2790,6 @@
                 display: flex;
                 justify-content: center;
             }
-            /* ── Footer logo matches navbar on extra small ── */
             .footer-brand .footer-logo img {
                 max-height: 32px;
             }
@@ -2839,7 +3139,7 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════
-    HTML — OUR STORY (bottom section)
+    HTML — OUR STORY
     ═══════════════════════════════════════════════════════════════ -->
     <section class="our-story" id="ourStorySection">
         <div class="container">
@@ -2882,6 +3182,74 @@
                         <span>Mea — Suiting the future</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+    HTML — HOW IT WORKS
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="how-it-works" id="howItWorksSection">
+        <div class="container">
+            <div class="how-it-works-header">
+                <div class="eyebrow-line"></div>
+                <span class="eyebrow-text">The Process</span>
+                <h2>How It Works</h2>
+            </div>
+
+            <div class="steps-grid">
+
+                <!-- Step 1 — First Suit -->
+                <div class="step">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2v4" stroke="currentColor" fill="none" />
+                            <path d="M6 6h12" stroke="currentColor" fill="none" />
+                            <path d="M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6" stroke="currentColor" fill="none" />
+                            <path d="M10 10h4" stroke="currentColor" fill="none" />
+                            <path d="M10 14h4" stroke="currentColor" fill="none" />
+                            <path d="M10 18h2" stroke="currentColor" fill="none" />
+                        </svg>
+                    </div>
+                    <span class="step-number">01</span>
+                    <h3>First Suit</h3>
+                    <p>We make your first suit in a standard size.</p>
+                </div>
+
+                <!-- Step 2 — Give Feedback -->
+                <div class="step">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" fill="none" />
+                            <circle cx="8" cy="10" r="1.5" fill="currentColor" stroke="none" />
+                            <circle cx="12" cy="10" r="1.5" fill="currentColor" stroke="none" />
+                            <circle cx="16" cy="10" r="1.5" fill="currentColor" stroke="none" />
+                        </svg>
+                    </div>
+                    <span class="step-number">02</span>
+                    <h3>Give Feedback</h3>
+                    <p>Let us know what you want to adjust.</p>
+                </div>
+
+                <!-- Step 3 — Custom Size -->
+                <div class="step">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" fill="none" />
+                            <line x1="8" y1="6" x2="16" y2="6" stroke="currentColor" fill="none" />
+                            <line x1="8" y1="10" x2="16" y2="10" stroke="currentColor" fill="none" />
+                            <line x1="8" y1="14" x2="16" y2="14" stroke="currentColor" fill="none" />
+                            <line x1="10" y1="18" x2="14" y2="18" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            <path d="M12 2v4" stroke="currentColor" fill="none" />
+                            <path d="M12 20v2" stroke="currentColor" fill="none" />
+                            <path d="M12 16l2 2 4-4" stroke="currentColor" fill="none" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <span class="step-number">03</span>
+                    <h3>Custom Size</h3>
+                    <p>We adjust your measurement profile so your next suit fits even better!</p>
+                </div>
+
             </div>
         </div>
     </section>
@@ -3282,10 +3650,6 @@
                 updateScroll();
             }, { passive: false });
 
-            /* Mobile uses the browser's native touch scrolling. This preserves
-               natural momentum/inertia and avoids fighting the browser's gesture
-               physics. The existing custom scroll behavior remains unchanged
-               for desktop. */
             var touchStartY = 0;
             var touchCurrentY = 0;
             var isTouching = false;
