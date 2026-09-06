@@ -162,6 +162,7 @@
             z-index: 2;
         }
 
+        /* ── LOGO — desktop size (unchanged) ── */
         .logo img {
             max-height: 44px;
             width: auto;
@@ -1413,6 +1414,7 @@
             outline: none;
             transition: border-color 0.3s ease, background 0.3s ease;
             letter-spacing: 0.02em;
+            text-align: left;
         }
 
         .footer-newsletter input[type="email"]::placeholder {
@@ -1500,9 +1502,12 @@
             .nav-links {
                 gap: 24px;
             }
+
+            /* ── Logo tablet ── */
             .logo img {
-                max-height: 38px;
+                max-height: 44px;
             }
+
             .testimonials-inner {
                 padding: 0 48px;
             }
@@ -1653,8 +1658,10 @@
                 width: auto;
                 justify-self: center;
             }
+
+            /* ── Logo mobile — larger ── */
             .logo img {
-                max-height: 32px;
+                max-height: 42px;
                 width: auto;
             }
 
@@ -1866,9 +1873,9 @@
             /* ── MODIFICATION: full height image on mobile ── */
             .our-story-image {
                 width: 100%;
-                height: 100vh; /* full viewport height */
+                height: 100vh;
                 min-height: auto;
-                aspect-ratio: unset; /* remove aspect ratio constraint */
+                aspect-ratio: unset;
                 flex: none;
             }
             .our-story-image img {
@@ -2013,6 +2020,10 @@
                 display: flex;
                 justify-content: center;
             }
+            /* ── Footer logo matches navbar on mobile ── */
+            .footer-brand .footer-logo img {
+                max-height: 42px;
+            }
             .footer-brand .tagline {
                 max-width: 100%;
                 margin-left: auto;
@@ -2071,14 +2082,17 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            /* ── Email textbox: center text ── */
             .footer-newsletter input[type="email"] {
                 min-width: 100%;
                 padding: 14px 16px;
                 font-size: 15px;
+                text-align: center;
             }
+            /* ── Sign Up button: same thickness as textbox ── */
             .footer-newsletter button {
                 width: 100%;
-                padding: 14px 20px;
+                padding: 14px 16px;
                 font-size: 12px;
                 justify-content: center;
             }
@@ -2126,9 +2140,11 @@
                 transform: translateY(-5.5px) rotate(-45deg);
             }
 
+            /* ── Logo small mobile ── */
             .logo img {
-                max-height: 28px;
+                max-height: 38px;
             }
+
             .nav-icons {
                 gap: 16px;
             }
@@ -2312,6 +2328,10 @@
                 display: flex;
                 justify-content: center;
             }
+            /* ── Footer logo matches navbar on small mobile ── */
+            .footer-brand .footer-logo img {
+                max-height: 38px;
+            }
             .footer-social a {
                 width: 40px;
                 height: 40px;
@@ -2335,10 +2355,11 @@
             .footer-newsletter input[type="email"] {
                 font-size: 14px;
                 padding: 12px 14px;
+                text-align: center;
             }
             .footer-newsletter button {
                 font-size: 11px;
-                padding: 12px 16px;
+                padding: 12px 14px;
             }
             .footer-bottom {
                 font-size: 12px;
@@ -2373,9 +2394,11 @@
                 transform: translateY(-4.5px) rotate(-45deg);
             }
 
+            /* ── Logo extra small ── */
             .logo img {
-                max-height: 24px;
+                max-height: 32px;
             }
+
             .nav-icons {
                 gap: 14px;
             }
@@ -2466,6 +2489,10 @@
                 display: flex;
                 justify-content: center;
             }
+            /* ── Footer logo matches navbar on extra small ── */
+            .footer-brand .footer-logo img {
+                max-height: 32px;
+            }
             .footer-social {
                 justify-content: center;
             }
@@ -2494,10 +2521,11 @@
             .footer-newsletter input[type="email"] {
                 font-size: 13px;
                 padding: 10px 12px;
+                text-align: center;
             }
             .footer-newsletter button {
                 font-size: 10px;
-                padding: 10px 14px;
+                padding: 10px 12px;
             }
             .footer-bottom {
                 font-size: 11px;
@@ -2506,7 +2534,7 @@
                 font-size: 11px;
             }
         }
-    
+
         /* Mobile-only: more responsive native scrolling */
         @media (max-width: 768px) {
             html {
@@ -2521,7 +2549,7 @@
                 touch-action: pan-y;
             }
         }
-</style>
+    </style>
 </head>
 
 <body>
