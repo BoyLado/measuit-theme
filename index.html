@@ -2144,7 +2144,6 @@
                     id="meaVideo"
                     src="video.mp4"
                     playsinline
-                    webkit-playsinline
                     controls
                     autoplay
                     muted
@@ -2647,7 +2646,6 @@
 
             let isVideoModalOpen = false;
             let lastFocusedEl = null;
-            let suppressPauseOverlay = false;
 
             function hidePlayOverlay() {
                 if (videoPlayOverlay) videoPlayOverlay.classList.remove('visible');
@@ -2662,49 +2660,23 @@
                 hidePlayOverlay();
             }
 
-            /* Always muted so browsers allow autoplay.
-               If play() is rejected because data isn't ready yet,
-               we retry once on `canplay`; only then we fall back
-               to the tap-to-play overlay. */
             function tryPlayVideo() {
-                if (!meaVideo) return;
-
+                // Browsers require muted for autoplay
                 meaVideo.muted = true;
-                meaVideo.defaultMuted = true;
-                meaVideo.volume = 0;
-
                 const p = meaVideo.play();
-
                 if (p && typeof p.then === 'function') {
                     p.then(function() {
                         hidePlayOverlay();
                     }).catch(function() {
-                        // Not enough data buffered yet → wait for canplay
-                        if (meaVideo.readyState < 3) {
-                            const onCanPlay = function() {
-                                meaVideo.removeEventListener('canplay', onCanPlay);
-                                if (!isVideoModalOpen) return;
-                                const p2 = meaVideo.play();
-                                if (p2 && typeof p2.then === 'function') {
-                                    p2.then(hidePlayOverlay).catch(showPlayOverlay);
-                                } else {
-                                    hidePlayOverlay();
-                                }
-                            };
-                            meaVideo.addEventListener('canplay', onCanPlay);
-                            return;
-                        }
-                        // Autoplay genuinely blocked → show tap-to-play
+                        // Autoplay blocked — show tap-to-play overlay
                         showPlayOverlay();
                     });
                 }
             }
 
-            // Show tap-to-play overlay when the video is paused (but not
-            // while we're still setting up / seeking on open).
+            // Show tap-to-play overlay when the video is paused
             meaVideo.addEventListener('pause', function() {
-                if (isVideoModalOpen && !meaVideo.ended && !suppressPauseOverlay &&
-                    !videoError.classList.contains('visible')) {
+                if (isVideoModalOpen && !videoError.classList.contains('visible')) {
                     showPlayOverlay();
                 }
             });
@@ -2719,9 +2691,10 @@
                 showVideoError();
             });
 
-            // stalled = browser is trying to fetch but data isn't arriving.
-            // We won't show error immediately (may recover), just log.
+            // Also listen for errors on the src attribute
             meaVideo.addEventListener('stalled', function() {
+                // stalled = browser is trying to fetch but data isn't arriving
+                // We won't show error immediately (may recover), just log
                 console.warn('Video stalled — check if video.mp4 exists and is accessible.');
             });
 
@@ -2747,51 +2720,14 @@
                 videoModal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
 
-                // Reset UI state
-                hidePlayOverlay();
-                if (videoError) videoError.classList.remove('visible');
+                // Reset video state
+                try {
+                    meaVideo.muted = true;
+                    meaVideo.currentTime = 0;
+                } catch (err) { /* noop */ }
 
-                // Prepare video for autoplay
-                meaVideo.muted = true;
-                meaVideo.defaultMuted = true;
-                meaVideo.volume = 0;
-
-                suppressPauseOverlay = true;
-
-                let playbackStarted = false;
-
-                function startPlayback() {
-                    if (playbackStarted) return;
-                    playbackStarted = true;
-
-                    try { meaVideo.currentTime = 0; } catch (err) { /* noop */ }
-
-                    tryPlayVideo();
-
-                    // Release the pause-overlay guard after the seek settles
-                    setTimeout(function() { suppressPauseOverlay = false; }, 500);
-                }
-
-                if (meaVideo.readyState >= 1) {
-                    startPlayback();
-                } else {
-                    // Kick off loading and wait for metadata before playing
-                    try { meaVideo.load(); } catch (err) { /* noop */ }
-
-                    const onLoadedMeta = function() {
-                        meaVideo.removeEventListener('loadedmetadata', onLoadedMeta);
-                        startPlayback();
-                    };
-
-                    meaVideo.addEventListener('loadedmetadata', onLoadedMeta);
-
-                    // Safety fallback so the video still starts even if
-                    // metadata event already fired or never arrives
-                    setTimeout(function() {
-                        meaVideo.removeEventListener('loadedmetadata', onLoadedMeta);
-                        startPlayback();
-                    }, 800);
-                }
+                // Check if video is ready; try to play
+                tryPlayVideo();
 
                 setTimeout(function() {
                     if (videoModalClose) videoModalClose.focus();
@@ -2805,7 +2741,6 @@
                 videoModal.classList.remove('open');
                 videoModal.setAttribute('aria-hidden', 'true');
 
-                suppressPauseOverlay = true;
                 try { meaVideo.pause(); } catch (err) { /* noop */ }
                 try { meaVideo.currentTime = 0; } catch (err) { /* noop */ }
 
@@ -2816,8 +2751,6 @@
                 if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
                     lastFocusedEl.focus();
                 }
-
-                setTimeout(function() { suppressPauseOverlay = false; }, 400);
             }
 
             if (watchThisBtn) {
